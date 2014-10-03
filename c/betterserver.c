@@ -5,7 +5,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 int main(int args,char * argv){
-    int i,s,fd,len;
+    int i,s,cli,len;
     struct sockaddr_in my_addr;
     struct sockaddr_in remote_addr;
     int sin_size;
@@ -25,19 +25,19 @@ int main(int args,char * argv){
     }
     listen(s,5);
     sin_size=sizeof(struct sockaddr_in);
-    if((fd=accept(s,(struct sockaddr *)&remote_addr,&sin_size))<0)
+    if((cli=accept(s,(struct sockaddr *)&remote_addr,&sin_size))<0)
     {
         perror("accept");
         return 1;
     }
     printf("accept client %s\n",inet_ntoa(remote_addr.sin_addr));
-    len=send(fd,"welcome to my server\n",21,0);
+    len=send(cli,"welcome to my server\n",21,0);
     for(i=0;i<5;i++){
-        len=recv(fd,buf,13,0);
+        len=recv(cli,buf,13,0);
         buf[len]='\0';
         printf("%s\n",buf);
     }
-    close(fd);
+    close(cli);
     close(s);
     return 0;
 }
