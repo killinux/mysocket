@@ -43,11 +43,12 @@ public class Server {
 				//System.out.println("客户端发过来的内容: " + input.readUTF());
 				byte[] bt = new byte[1024];
 				int leng = input.read(bt);
-				System.out.println(new String(bt, 0, leng));
+				String str = new String(bt, 0, leng);
+				System.out.println(str);
 				// 发送键盘输入的一行
 				// String s = new BufferedReader(new
 				// InputStreamReader(System.in)).readLine();
-				String s = "server d shu ru";
+				String s = "server: "+str;
 				out.write(s.getBytes());
 				out.flush();
 				input.close();

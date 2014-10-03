@@ -34,7 +34,7 @@ public class HelloWorldWebSocketServlet extends WebSocketServlet {
 				String msg = "";
 				try {
 					// 向服务器利用Socket发送信息
-					socket = new Socket("192.168.1.102", 5000);
+					socket = new Socket("192.168.0.102", 5000);
 					//socket = new Socket("127.0.0.1",5000);
 					PrintWriter output = new PrintWriter(
 							socket.getOutputStream());
