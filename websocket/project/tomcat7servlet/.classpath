@@ -2,19 +2,17 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_05"/>
-	<classpathentry kind="lib" path="lib/catalina.jar"/>
-	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat7-websocket.jar"/>
-	<classpathentry kind="lib" path="lib/websocket-api.jar"/>
 	<classpathentry kind="lib" path="lib/annotations-api.jar"/>
 	<classpathentry kind="lib" path="lib/catalina-ant.jar"/>
 	<classpathentry kind="lib" path="lib/catalina-ha.jar"/>
 	<classpathentry kind="lib" path="lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="lib/catalina.jar"/>
 	<classpathentry kind="lib" path="lib/ecj-4.4.jar"/>
 	<classpathentry kind="lib" path="lib/el-api.jar"/>
 	<classpathentry kind="lib" path="lib/jasper-el.jar"/>
 	<classpathentry kind="lib" path="lib/jasper.jar"/>
 	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-api.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-coyote.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-dbcp.jar"/>
@@ -23,5 +21,7 @@
 	<classpathentry kind="lib" path="lib/tomcat-i18n-ja.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-jdbc.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat7-websocket.jar"/>
+	<classpathentry kind="lib" path="lib/websocket-api.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
