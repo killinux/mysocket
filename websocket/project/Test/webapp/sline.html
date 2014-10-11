@@ -16,7 +16,6 @@
 	    if (ws != null) {
 	    	ws.send(x+","+y);
 		}
-		
 	} 
 	function makedot(x,y){ 
 	    var sp=document.getElementById("sspp"); 
@@ -33,8 +32,7 @@
 <script type="text/javascript">
 	var ws = null;
 	function log(text) {
-		document.getElementById("log").innerHTML = text + "<br>"
-				+ document.getElementById("log").innerHTML;
+		document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
 	}
 	function startServer() {
 		var url = document.getElementById("serverip").value;
@@ -47,16 +45,16 @@
 			return;
 		}
 		ws.onopen = function() {
-			log('Opened!');
+			//log('Opened!');
 		};
 		ws.onmessage = function(event) {
-			log(event.data);
+			//log(event.data);
 			var x_value =event.data.split(",")[0];
 			var y_value = event.data.split(",")[1];
 			makedot(x_value,y_value); 
 		};
 		ws.onclose = function() {
-			log('Closed!');
+			//log('Closed!');
 		}
 	}
 	function sendMessage() {
@@ -68,19 +66,13 @@
 	function stopconn() {
 		ws.close();
 	}
-	</script>
+</script>
 	
  
 <body onload="startServer()">
-<div id="debug_div" style="display:none">
-	<input id="serverip" type="text" size="20"
+
+<input id="serverip" type="text" size="20" style="display:none"
 		value="ws://192.168.0.102:8080/webs/websocket/line" />
-	<input id="conbtn" type="button" onclick="startServer()" value="open" />
-	<input id="stopbtn" type="button" onclick="stopconn()" value="stop" />
-	</br>
-	<input id="textMessage" type="text" size="20" />
-	<input type="button" onclick="sendMessage()" value="Send">
-</div>
 <div id="log" style="display:none"></div>
 <span id="sspp" onMouseDown="myMouseDown()" onMouseUp="myMouseUp()" style="position:absolute;top:50px;left:50px;width:1000px;height:1000px;background-color:#eeeeee "> 
 </span>
