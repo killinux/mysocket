@@ -4,46 +4,19 @@
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <title>js line</title> 
-<style type="text/css"> 
-.style1 { 
-    font-size: x-small; 
-} 
-</style> 
 </head> 
-
 <script type="text/javascript"> 
 	var w=1; 
 	var h=1; 
 	var col="blue"; 
-	function add1() 
-	{ 
-	    w+=1; 
-	    h+=1; 
-
-	} 
-	function cut1() 
-	{ 
-	    if(w>1&&h>1) 
-	    { 
-	        w-=1; 
-	        h-=1; 
-	    } 
-	} 
-	function catchMouse() 
-	{ 
+	function catchMouse(){ 
 	    var x=event.clientX-50; 
 	    var y=event.clientY-52; 
 	    makedot(x,y); 
-	    //window.setTimeout('catchMouse()',3); 
 	} 
 	function makedot(x,y){ 
 	    var sp=document.getElementById("sspp"); 
 	    sp.insertAdjacentHTML("BeforeEnd","<hr style='position:absolute;left:"+x+"px;top:"+y+"px;width:"+w+"px;height:"+h+"px;color:"+col+";'>"); 
-	    //document.write("<div style='height:1px;position:absolute;left:"+x+"px;top:"+y+"px;width:2px;background:#f00;overflow:hidden'></div>") 
-	} 
-	function changeColor(a) 
-	{ 
-	    col=a.value; 
 	} 
 	function myMouseDown(){
 		document.onmousemove=catchMouse
@@ -54,23 +27,8 @@
 </script> 
 
 <body> 
-aaaacc
-<hr style='position:absolute;left:111px;top:222px;width:22px;height:15px;color:red;'>bbb
 <span id="sspp" onMouseDown="myMouseDown()" onMouseUp="myMouseUp()" style="position:absolute;top:50px;left:50px;width:500px;height:500px;background-color:#eeeeee "> 
-
 </span> 
-<form action=""> 
-	<input type="button" onClick="add1()" name="add" value="+"> 
-	<input type="button" onClick="cut1()" name="cut" value="-"> 
-	<select id="col" onChange="changeColor(this)"> 
-		<option value="black">black</option> 
-		<option value="blue">blue</option> 
-		<option value="green">green</option> 
-		<option value="orange">orange</option> 
-		<option value="red">red</option> 
-		<option value="pink">pink</option> 
-	</select> 
-</form> 
 </body> 
 
 </html> 

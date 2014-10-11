@@ -36,6 +36,15 @@
       <servlet-name>wsSnake</servlet-name>
       <url-pattern>/websocket/test</url-pattern>
     </servlet-mapping>
+    
+     <servlet>
+      <servlet-name>wsLine</servlet-name>
+      <servlet-class>com.hao.LineWebSocketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>wsLine</servlet-name>
+      <url-pattern>/websocket/line</url-pattern>
+    </servlet-mapping>
    
 
     <welcome-file-list>

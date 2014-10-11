@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jiben</title>
+</head>
+<script type="text/javascript">
+	var ws = null;
+	function log(text) {
+		document.getElementById("log").innerHTML = text + "<br>"
+				+ document.getElementById("log").innerHTML;
+	}
+	function startServer() {
+		var url = document.getElementById("serverip").value;// "ws://192.168.0.102:8887";  
+		if ('WebSocket' in window) {
+			ws = new WebSocket(url);
+		} else if ('MozWebSocket' in window) {
+			ws = new MozWebSocket(url);
+		} else {
+			log('浏览器不支持');
+			return;
+		}
+		ws.onopen = function() {
+			log('Opened!');
+		};
+		ws.onmessage = function(event) {
+			log('Receive message: ' + event.data);
+		};
+		ws.onclose = function() {
+			log('Closed!');
+		}
+	}
+	function sendMessage() {
+		var textMessage = document.getElementById("textMessage").value;
+		if (ws != null && textMessage != "") {
+			ws.send(textMessage);
+		}
+	}
+	function stopconn() {
+		ws.close();
+	}
+	</script>
+	
+<script type="text/javascript"> 
+//--------------line----begin-------
+	var w=1; 
+	var h=1; 
+	var col="blue"; 
+	function catchMouse(){ 
+	    var x=event.clientX-50; 
+	    var y=event.clientY-52; 
+	    makedot(x,y); 
+	    if (ws != null) {
+	    	ws.send(x+","+y);
+		}
+		
+	} 
+	function makedot(x,y){ 
+	    var sp=document.getElementById("sspp"); 
+	    sp.insertAdjacentHTML("BeforeEnd","<hr style='position:absolute;left:"+x+"px;top:"+y+"px;width:"+w+"px;height:"+h+"px;color:"+col+";'>"); 
+	} 
+	function myMouseDown(){
+		document.onmousemove=catchMouse
+	}
+	function myMouseUp(){
+		document.onmousemove=null;
+	}
+//--------------line----end---------
+</script> 
+<body onload="">
+	<input id="serverip" type="text" size="20"
+		value="ws://localhost:8080/webs/websocket/line" />
+	<input id="conbtn" type="button" onclick="startServer()" value="open" />
+	<input id="stopbtn" type="button" onclick="stopconn()" value="stop" />
+	</br>
+	<input id="textMessage" type="text" size="20" />
+	<input type="button" onclick="sendMessage()" value="Send">
+
+<span id="sspp" onMouseDown="myMouseDown()" onMouseUp="myMouseUp()" style="position:absolute;top:50px;left:50px;width:500px;height:500px;background-color:#eeeeee "> 
+</span>
+
+	<div id="log"></div>
+</body>
+</html>
