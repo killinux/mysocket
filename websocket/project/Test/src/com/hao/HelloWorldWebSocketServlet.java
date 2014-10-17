@@ -20,13 +20,15 @@ import org.apache.catalina.websocket.WebSocketServlet;
 import org.apache.catalina.websocket.WsOutbound;
 
 public class HelloWorldWebSocketServlet extends WebSocketServlet {
-	private static Map<String,MyMessageInbound> mmiList  = new HashMap<String,MyMessageInbound>();
+	public static Map<String,MyMessageInbound> mmiList  = new HashMap<String,MyMessageInbound>();
 
 	protected StreamInbound createWebSocketInbound(String subProtocol,
 			HttpServletRequest arg1) {
 		return new MyMessageInbound();
 	}
-
+	public int getUserCount(){
+		return mmiList.size();
+	}
 	private class MyMessageInbound extends MessageInbound {
 		WsOutbound myoutbound;
 		String mykey;
@@ -35,8 +37,6 @@ public class HelloWorldWebSocketServlet extends WebSocketServlet {
 			try {
 				System.out.println("Open Client.");
 				this.myoutbound = outbound;
-				//mmiList.add(this);
-				//Random random = new Random(100);//指定种子数100
 				mykey ="open "+System.currentTimeMillis();;
 				mmiList.put(mykey, this);
 				System.out.println("mmiList size:"+mmiList.size());
