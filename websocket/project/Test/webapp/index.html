@@ -66,7 +66,9 @@
 				//alert(thisdata);
 				document.getElementById("username").value=thisdata.split(" ")[1];
 			}else{
-				log(event.data);
+				//log(event.data);
+				var showData=event.data.split(",");
+				log(showData[0]+"说:"+showData[2]);
 			}
 		};
 		ws.onclose = function() {
@@ -78,9 +80,9 @@
 	function sendMessage() {
 		var textMessage = document.getElementById("textMessage").value;
 		var username = document.getElementById("username").value;
-		
+		var toUser = "";
 		if (ws != null && textMessage != "") {
-			ws.send(username+"说:"+textMessage);
+			ws.send(username+","+toUser+","+textMessage);
 		}
 		document.getElementById("textMessage").value="";
 	}
@@ -92,7 +94,9 @@
 </script>
 <body onload="startServer()">
 	<a href="http://182.254.155.153:8080/webs/qrcode/examples/basic.html"> ----enter</a>
-	<input id="serverip" type="hidden" size="20"
+	<!-- <input id="serverip" type="text" size="20"
+		value="ws://192.168.0.102:8080/webs/websocket/test" /> -->
+	 <input id="serverip" type="hidden" size="20"
 		value="ws://182.254.155.153:8080/webs/websocket/test" />
 	<!-- ws://192.168.0.102:8887 182.254.155.153 -->
 	<!-- <input id="conbtn" type="button" onclick="startServer()" value="open" />
