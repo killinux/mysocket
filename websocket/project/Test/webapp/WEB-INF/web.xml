@@ -45,15 +45,6 @@
       <servlet-name>wsLine</servlet-name>
       <url-pattern>/websocket/sline</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-      <servlet-name>wsmanager</servlet-name>
-      <servlet-class>com.hao.SocketManager</servlet-class>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>wsmanager</servlet-name>
-      <url-pattern>/websocket/manager</url-pattern>
-    </servlet-mapping>
    
 
     <welcome-file-list>
