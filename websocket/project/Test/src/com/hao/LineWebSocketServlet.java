@@ -14,7 +14,7 @@ import org.apache.catalina.websocket.WebSocketServlet;
 import org.apache.catalina.websocket.WsOutbound;
 
 public class LineWebSocketServlet extends WebSocketServlet {
-	public static Map<String,MyMessageInbound> mmiList  = new HashMap<String,MyMessageInbound>();
+	private static Map<String,MyMessageInbound> mmiList  = new HashMap<String,MyMessageInbound>();
 
 	protected StreamInbound createWebSocketInbound(String subProtocol,
 			HttpServletRequest arg1) {

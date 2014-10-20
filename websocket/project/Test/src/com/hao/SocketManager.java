@@ -18,7 +18,7 @@ public class SocketManager extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=GB2312"); // 这条语句指明了向客户端发送的内容格式和采用的字符编码．
-		PrintWriter out = response.getWriter();
+		/*PrintWriter out = response.getWriter();
 		out.println("HelloWorldWebSocketServlet:"+HelloWorldWebSocketServlet.mmiList.size()+" "); // 利用PrintWriter对象的方法将数据发送给客户端
 		for (Map.Entry entry : HelloWorldWebSocketServlet.mmiList.entrySet()) {
 			String key= (String) entry.getKey();
@@ -29,7 +29,7 @@ public class SocketManager extends HttpServlet {
 			String key= (String) entry.getKey();
 			out.println(key);
 		}
-		out.close();
+		out.close();*/
 	}
 
 	// 用于处理客户端发送的POST请求
