@@ -43,7 +43,7 @@
     </servlet>
     <servlet-mapping>
       <servlet-name>wsLine</servlet-name>
-      <url-pattern>/websocket/line</url-pattern>
+      <url-pattern>/websocket/sline</url-pattern>
     </servlet-mapping>
     
     <servlet>
