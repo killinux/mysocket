@@ -49,6 +49,17 @@ public class LineWebSocketServlet extends WebSocketServlet {
 
 		}
 
+		/*@Override
+		protected void onTextMessage(CharBuffer message) throws IOException {
+			System.out.println("LineWebSocketServlet.onTextMessage--->" + message.toString());
+			for (Map.Entry<String, MyMessageInbound> entry : mmiList.entrySet()) {
+				  MyMessageInbound mmib = (MyMessageInbound) entry.getValue();
+	              CharBuffer buffer = CharBuffer.wrap(message);
+	              mmib.myoutbound.writeTextMessage(buffer);
+	              mmib.myoutbound.flush();
+			}
+			
+		}*/
 		@Override
 		protected void onTextMessage(CharBuffer message) throws IOException {
 			System.out.println("LineWebSocketServlet.onTextMessage--->" + message.toString());

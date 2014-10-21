@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>CoreWebSocket Example</title>
+    </head>
+    <body>
+        
+        <div>
+            Position of light gray box is calculated on the server side in Objective-C and sent back to this HTML page.
+        </div>
+
+        <div id="box2" style="position: absolute; top: 100px; left: 100px; background-color: lightgray; width: 50px; height: 50px; color: white; font-size: 10px; text-align: center; cursor: pointer"></div>
+        <div id="box" style="position: absolute; top: 100px; left: 100px; background-color: gray; width: 50px; height: 50px; color: white; font-size: 10px; text-align: center; cursor: pointer"></div>
+
+        <script type="text/javascript" charset="utf-8">
+
+            var box = document.getElementById('box')
+            var box2 = document.getElementById('box2')
+
+            if ("WebSocket" in window) {
+               // ws = new WebSocket('ws://localhost:6001');
+               // ws = new WebSocket('ws://192.168.0.101:8080/webs/websocket/sline');
+                ws = new WebSocket('ws://182.254.155.153:8080/webs/websocket/sline');
+
+                ws.onerror = function(e) {
+                    console.log('error', e)
+                }
+
+                ws.onopen = function(e) {
+                    console.log('open', e)
+                }
+
+                ws.onmessage = function(e) {
+                	console.log("onmessage:"+e.data);
+                    var xy =e.data.split(" ");// JSON.parse(e.data);
+                    box2.style.left = (xy[0] - 25) + 'px'
+                    box2.style.top = (xy[1] - 25) + 'px'
+                    box2.innerHTML = parseInt(xy[0]) + ' x ' + parseInt(xy[1])
+                }
+
+                ws.onclose = function(e) {
+                    console.log('close', e)
+                }
+                
+                document.onmousemove = function(e) {
+                    box.style.left = (e.pageX - 25) + 'px'
+                    box.style.top = (e.pageY - 25) + 'px'
+                    box.innerHTML = e.pageX + ' x ' + e.pageY
+                    ws.send([e.pageX, e.pageY].join(" "))
+                }
+            }
+        </script>
+    </body>
+</html>
