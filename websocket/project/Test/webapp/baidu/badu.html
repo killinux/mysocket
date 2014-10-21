@@ -1,0 +1,122 @@
+
+<div>
+	<p>
+		搜索: <input id="txtarea" type="text" size="50" /> <input
+			id="areaSearch" type="button" value="搜索" style="cursor: pointer" />
+	</p>
+	<p>
+		纬度：<input name="txtlatitude" type="text" id="txtlatitude"
+			style="width: 200px;" /> 经度：<input name="txtLongitude" type="text"
+			id="txtLongitude" style="width: 200px;" /> 标注点所在区域：<input
+			name="txtAreaCode" type="text" id="txtAreaCode" style="width: 200px;" />
+	</p>
+</div>
+<div
+	style="width: 420px; height: 340px; border: 1px solid gray; float: left;"
+	id="container"></div>
+<div style="width: 350px; height: 340px;" id="Div1">
+	<div>
+		<div class="sel_container">
+			<strong id="curCity">北京市</strong> [<a id="curCityText"
+				href="javascript:void(0)">更换城市</a>]
+		</div>
+		<div class="map_popup" id="cityList" style="display: none;">
+			<div class="popup_main">
+				<div class="title">城市列表</div>
+				<div class="cityList" id="citylist_container"></div>
+				<button id="popup_close"></button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+<script type="text/javascript"
+	src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+<script type="text/javascript">
+	var map = new BMap.Map("container");
+	map.centerAndZoom(new BMap.Point(117.10, 40.13), 11);
+	map.addControl(new BMap.NavigationControl());
+	map.addControl(new BMap.ScaleControl());
+	map.addControl(new BMap.OverviewMapControl());
+	map.addControl(new BMap.MapTypeControl());
+	//搜索 
+	document.getElementById("areaSearch").onclick = function() {
+		// 创建地址解析器实例 
+		var myGeo = new BMap.Geocoder();
+		var searchTxt = document.getElementById("txtarea").value;
+		// 将地址解析结果显示在地图上，并调整地图视野 
+		myGeo.getPoint(searchTxt, function(point) {
+			if (point) {
+				map.centerAndZoom(point, 16);
+				document.getElementById("txtlatitude").value = point.lat;
+				document.getElementById("txtLongitude").value = point.lng;
+				var pointMarker = new BMap.Point(point.lng, point.lat);
+				geocodeSearch(pointMarker);
+
+				map.addOverlay(new BMap.Marker(point));
+			} else
+				alert("搜索不到结果");
+		}, "全国");
+	}
+	map.enableScrollWheelZoom();
+	// 创建CityList对象，并放在citylist_container节点内 
+	var myCl = new BMapLib.CityList({
+		container : "citylist_container",
+		map : map
+	});
+	// 给城市点击时，添加相关操作 
+	myCl.addEventListener("cityclick", function(e) {
+		// 修改当前城市显示 
+		document.getElementById("curCity").innerHTML = e.name;
+		// 点击后隐藏城市列表 
+		document.getElementById("cityList").style.display = "none";
+	});
+	// 给“更换城市”链接添加点击操作 
+	document.getElementById("curCityText").onclick = function() {
+		var cl = document.getElementById("cityList");
+		if (cl.style.display == "none") {
+			cl.style.display = "";
+		} else {
+			cl.style.display = "none";
+		}
+	};
+	// 给城市列表上的关闭按钮添加点击操作 
+	document.getElementById("popup_close").onclick = function() {
+		var cl = document.getElementById("cityList");
+		if (cl.style.display == "none") {
+			cl.style.display = "";
+		} else {
+			cl.style.display = "none";
+		}
+	};
+
+	map.addEventListener("click", function(e) {
+		document.getElementById("txtlatitude").value = e.point.lat;
+		document.getElementById("txtLongitude").value = e.point.lng;
+		map.clearOverlays();
+		var pointMarker = new BMap.Point(e.point.lng, e.point.lat); // 创建标注的坐标 
+		addMarker(pointMarker);
+		geocodeSearch(pointMarker);
+	});
+
+	function addMarker(point) {
+		var myIcon = new BMap.Icon("mk_icon.png", new BMap.Size(21, 25), {
+			offset : new BMap.Size(21, 21),
+			imageOffset : new BMap.Size(0, -21)
+		});
+		var marker = new BMap.Marker(point, {
+			icon : myIcon
+		});
+		map.addOverlay(marker);
+	}
+	function geocodeSearch(pt) {
+		var myGeo = new BMap.Geocoder();
+		myGeo.getLocation(pt, function(rs) {
+			var addComp = rs.addressComponents;
+			document.getElementById("txtAreaCode").value = addComp.province
+					+ ", " + addComp.city + ", " + addComp.district;
+		});
+	}
+</script>
