@@ -3,37 +3,39 @@
 <meta http-equiv="content-type" content="text/html; charset=gb2312">
 <script type="text/javascript" src="glMatrix-0.9.5.js"></script>
 
-        <script id="shader-vs" type="x-shader/x-vertex">
+<script id="shader-vs" type="x-shader/x-vertex">
         attribute vec3 v3Position;
         void main(void)
         {
             gl_Position = vec4(v3Position, 1.0);
         }
-        </script>
+</script>
 
-        <script id="shader-fs" type="x-shader/x-fragment">
+<script id="shader-fs" type="x-shader/x-fragment">
         void main(void)
         {
             gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
         }
-        </script>
+</script>
 
-<script>
-        function ShaderSourceFromScript(scriptID)
-        {
-            var shaderScript = document.getElementById(scriptID);
-            if (shaderScript == null) return "";
-
-            var sourceCode = "";
-            var child = shaderScript.firstChild;
-            while (child)
-            {
-                if (child.nodeType == child.TEXT_NODE ) sourceCode += child.textContent;
-                child = child.nextSibling;
+<script type="text/javascript">
+    function ShaderSourceFromScript(scriptID)
+    {
+        var shaderScript = document.getElementById(scriptID);
+        if (shaderScript == null) return "";
+        var sourceCode = "";
+        var child = shaderScript.firstChild;       
+        while (child){
+        	//console.log("child.nodeType:"+child.nodeType);
+        	//console.log("child.TEXT_NODE:"+child.TEXT_NODE);
+            if (child.nodeType == child.TEXT_NODE ) {
+            	sourceCode += child.textContent;
             }
-
-            return sourceCode;
+           // console.log("sourceCode:"+sourceCode);
+            child = child.nextSibling;
         }
+        return sourceCode;
+    }
 
     var webgl = null;
     var vertexShaderObject = null;
@@ -46,8 +48,7 @@
     {
         var myCanvasObject = document.getElementById('myCanvas');
         webgl = myCanvasObject.getContext("experimental-webgl");
-
-        webgl.viewport(0, 0, myCanvasObject.clientWidth, myCanvasObject.clientHeight);
+        webgl.viewport(0, 0, myCanvasObject.clientWidth, myCanvasObject.clientHeight);//canvas settting
 
         vertexShaderObject = webgl.createShader(webgl.VERTEX_SHADER);
         fragmentShaderObject = webgl.createShader(webgl.FRAGMENT_SHADER);
@@ -55,7 +56,7 @@
         webgl.shaderSource(vertexShaderObject, ShaderSourceFromScript("shader-vs"));
         webgl.shaderSource(fragmentShaderObject, ShaderSourceFromScript("shader-fs"));
 
-        webgl.compileShader(vertexShaderObject);
+        webgl.compileShader(vertexShaderObject);//定点
         webgl.compileShader(fragmentShaderObject);
 
         if(!webgl.getShaderParameter(vertexShaderObject, webgl.COMPILE_STATUS)){alert("error:vertexShaderObject");return;}
@@ -74,15 +75,16 @@
         webgl.useProgram(programObject);
 
         var jsArrayData = [
-        0.0, 1.0, 0.0,//上顶点
-        -1.0, -1.0, 0.0,//左顶点
-        1.0, 0.0, 0.0];//右顶点
+        	 1.0,  1.0, 0.0,//上顶点
+        	-1.0, -1.0, 0.0,//左顶点
+        	 1.0,  0.0, 0.0 //右顶点
+        ];
 
        triangleBuffer = webgl.createBuffer();
        webgl.bindBuffer(webgl.ARRAY_BUFFER, triangleBuffer);
        webgl.bufferData(webgl.ARRAY_BUFFER, new Float32Array(jsArrayData), webgl.STATIC_DRAW);
 
-       webgl.clearColor(0.0, 0.0, 0.0, 1.0);
+       webgl.clearColor(0.0, 0.0, 0.0, 1.0);//red,green,blue
        webgl.clear(webgl.COLOR_BUFFER_BIT);
 
        webgl.bindBuffer(webgl.ARRAY_BUFFER, triangleBuffer);
@@ -97,6 +99,6 @@
 </script>
 </head>
 <body onload='Init()'>
-    <canvas id="myCanvas" style="border:1px solid red;" width='600px' height='450px'></canvas>
+    <canvas id="myCanvas" style="border:1px solid red;" width='601px' height='450px'></canvas>
 </body>
 </html>

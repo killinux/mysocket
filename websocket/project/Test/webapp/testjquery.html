@@ -1,0 +1,21 @@
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, target-densitydpi=high-dpi">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+<script type="text/javascript" src="jquery-1.7.2.js" ></script>
+</head>
+<body>
+<script type="text/javascript">
+	$.post(
+        '/api/v2/login_funshion',
+        {username:"haoning", password:"haoning", qrcode:'', autologin:'on'},
+        function(data) {
+        	console.log(data);
+            return false;
+        }
+    );
+</script>
+</body>
+</html>
