@@ -1,0 +1,30 @@
+Determining if the include file in6addr.h exists failed with the following output:
+Change Dir: /data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2760098586/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2760098586.dir/build.make CMakeFiles/cmTryCompileExec2760098586.dir/build
+gmake[1]: Entering directory `/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp'
+/usr/local/bin/cmake -E cmake_progress_report /data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2760098586.dir/CheckIncludeFile.c.o
+/usr/bin/cc  -DKEYWORD=__inline  -o CMakeFiles/cmTryCompileExec2760098586.dir/CheckIncludeFile.c.o   -c /data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:21: error: in6addr.h: No such file or directory
+gmake[1]: Leaving directory `/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp'
+gmake[1]: *** [CMakeFiles/cmTryCompileExec2760098586.dir/CheckIncludeFile.c.o] Error 1
+gmake: *** [cmTryCompileExec2760098586/fast] Error 2
+
+
+Determining if the include file vfork.h exists failed with the following output:
+Change Dir: /data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1329309595/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1329309595.dir/build.make CMakeFiles/cmTryCompileExec1329309595.dir/build
+gmake[1]: Entering directory `/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp'
+/usr/local/bin/cmake -E cmake_progress_report /data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1329309595.dir/CheckIncludeFile.c.o
+/usr/bin/cc  -DKEYWORD=__inline  -o CMakeFiles/cmTryCompileExec1329309595.dir/CheckIncludeFile.c.o   -c /data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:19: error: vfork.h: No such file or directory
+gmake[1]: Leaving directory `/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/CMakeTmp'
+gmake[1]: *** [CMakeFiles/cmTryCompileExec1329309595.dir/CheckIncludeFile.c.o] Error 1
+gmake: *** [cmTryCompileExec1329309595/fast] Error 2
+
+

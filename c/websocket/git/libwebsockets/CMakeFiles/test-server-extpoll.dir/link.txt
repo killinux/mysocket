@@ -1,0 +1,1 @@
+/usr/bin/cc  -Wall -Werror -O4 -fvisibility=hidden     CMakeFiles/test-server-extpoll.dir/test-server/test-server.c.o  -o bin/libwebsockets-test-server-extpoll -rdynamic lib/libwebsockets.a -lz -lssl -lcrypto -ldl -lm 
