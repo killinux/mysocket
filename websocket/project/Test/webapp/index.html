@@ -80,7 +80,7 @@
 	function sendMessage() {
 		var textMessage = document.getElementById("textMessage").value;
 		var username = document.getElementById("username").value;
-		var toUser = "";
+		var toUser = document.getElementById("toUser").value;;
 		if (ws != null && textMessage != "") {
 			ws.send(username+","+toUser+","+textMessage);
 		}
