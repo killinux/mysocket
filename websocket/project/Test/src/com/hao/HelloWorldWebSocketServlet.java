@@ -37,10 +37,10 @@ public class HelloWorldWebSocketServlet extends WebSocketServlet {
 			try {
 				System.out.println("Open Client.");
 				this.myoutbound = outbound;
-				mykey ="open "+System.currentTimeMillis();;
+				mykey =""+System.currentTimeMillis();;
 				mmiList.put(mykey, this);
 				System.out.println("mmiList size:"+mmiList.size());
-				outbound.writeTextMessage(CharBuffer.wrap(mykey));
+				outbound.writeTextMessage(CharBuffer.wrap("open "+mykey));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -66,15 +66,18 @@ public class HelloWorldWebSocketServlet extends WebSocketServlet {
 			CharBuffer buffer = CharBuffer.wrap(message);
 			if("".equals(msgarray[1])){
 				for (Map.Entry<String, MyMessageInbound> entry : mmiList.entrySet()) {
+					
 					  MyMessageInbound mmib = (MyMessageInbound) entry.getValue(); 
 		              mmib.myoutbound.writeTextMessage(buffer);
 		              mmib.myoutbound.flush();
 				}
 			}else{
-				mmiList.get(msgarray[1]).myoutbound.writeTextMessage(buffer);
-				mmiList.get(msgarray[1]).myoutbound.flush();
+				MyMessageInbound toUser=mmiList.get(msgarray[1]);
+				if(toUser!=null){
+					toUser.myoutbound.writeTextMessage(buffer);
+					toUser.myoutbound.flush();
+				}
 			}
-			
 			
 			/*Socket socket;
 			String msg = "";
