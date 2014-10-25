@@ -1,0 +1,9 @@
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/dist.dir
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/test-client.dir
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/test-echo.dir
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/test-fraggle.dir
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/test-ping.dir
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/test-server.dir
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/test-server-extpoll.dir
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/websockets.dir
+/data/mysocket/c/websocket/git/libwebsockets/CMakeFiles/websockets_shared.dir
