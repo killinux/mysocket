@@ -62,18 +62,21 @@ public class HelloWorldWebSocketServlet extends WebSocketServlet {
 		protected void onTextMessage(CharBuffer message) throws IOException {
 
 			System.out.println("onText--->" + message.toString());
+			
 			String[] msgarray= message.toString().split(",");
-			CharBuffer buffer = CharBuffer.wrap(message);
 			if("".equals(msgarray[1])){
 				for (Map.Entry<String, MyMessageInbound> entry : mmiList.entrySet()) {
-					
+					System.out.println(entry.getKey()+"-----");
 					  MyMessageInbound mmib = (MyMessageInbound) entry.getValue(); 
+					  CharBuffer buffer = CharBuffer.wrap(message);
+					  System.out.println(buffer);
 		              mmib.myoutbound.writeTextMessage(buffer);
 		              mmib.myoutbound.flush();
 				}
 			}else{
 				MyMessageInbound toUser=mmiList.get(msgarray[1]);
 				if(toUser!=null){
+					CharBuffer buffer = CharBuffer.wrap(message);
 					toUser.myoutbound.writeTextMessage(buffer);
 					toUser.myoutbound.flush();
 				}
