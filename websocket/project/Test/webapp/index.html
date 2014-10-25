@@ -93,7 +93,7 @@
 	}
 </script>
 <body onload="startServer()">
-	<a href="http://182.254.155.153:8080/webs/qrcode/examples/basic.html"> ----enter</a>
+	<!-- <a href="/qrcode/examples/basic.html"> qrcode</a> -->
 	<!-- <input id="serverip" type="text" size="20"
 		value="ws://192.168.0.102:8080/webs/websocket/test" /> -->
 	 <input id="serverip" type="hidden" size="20"
@@ -102,7 +102,8 @@
 	<!-- <input id="conbtn" type="button" onclick="startServer()" value="open" />
 		<input id="stopbtn" type="button" onclick="stopconn()" value="stop" disabled="disabled"/> -->
 	</br>
-	您的名字：<input id="username" type="text"  /></br></br>
+	您的Id：<input id="username" type="text"  readonly/></br>
+	to Id：<input id="toUser" type="text"  /> 如果为空则群发</br>
 	<input id="textMessage" type="text" size="20" onkeydown="enterSend()"  style="border:1;width:400px"  />
 	<input id="sendbtn" type="button" onclick="sendMessage()" value="Send">
 	<div id="log"></div>

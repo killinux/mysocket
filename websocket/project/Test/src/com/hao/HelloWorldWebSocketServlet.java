@@ -60,22 +60,21 @@ public class HelloWorldWebSocketServlet extends WebSocketServlet {
 
 		@Override
 		protected void onTextMessage(CharBuffer message) throws IOException {
-			// TODO Auto-generated method stub
+
 			System.out.println("onText--->" + message.toString());
-//			for (int i=0;i< mmiList.size();i++ ) {
-//				MyMessageInbound mmib = (MyMessageInbound) mmiList.get(i);
-//                CharBuffer buffer = CharBuffer.wrap(message);
-//                mmib.myoutbound.writeTextMessage(buffer);
-//                mmib.myoutbound.flush();
-//            }
-			for (Map.Entry<String, MyMessageInbound> entry : mmiList.entrySet()) {
-				  //System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
-				  MyMessageInbound mmib = (MyMessageInbound) entry.getValue();
-				 // String str = entry.getKey()+message.toString()
-	              CharBuffer buffer = CharBuffer.wrap(message);
-	              mmib.myoutbound.writeTextMessage(buffer);
-	              mmib.myoutbound.flush();
+			String[] msgarray= message.toString().split(",");
+			CharBuffer buffer = CharBuffer.wrap(message);
+			if("".equals(msgarray[1])){
+				for (Map.Entry<String, MyMessageInbound> entry : mmiList.entrySet()) {
+					  MyMessageInbound mmib = (MyMessageInbound) entry.getValue(); 
+		              mmib.myoutbound.writeTextMessage(buffer);
+		              mmib.myoutbound.flush();
+				}
+			}else{
+				mmiList.get(msgarray[1]).myoutbound.writeTextMessage(buffer);
+				mmiList.get(msgarray[1]).myoutbound.flush();
 			}
+			
 			
 			/*Socket socket;
 			String msg = "";
