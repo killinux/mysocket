@@ -75,25 +75,25 @@
         webgl.useProgram(programObject);
 
         var jsArrayData = [
-        	 1.0,  1.0, 0.0,//上顶点
-        	-1.0, -1.0, 0.0,//左顶点
-        	 1.0,  0.0, 0.0 //右顶点
+        	 0.5,  0.5, 0.0,//上顶点
+        	 0.0, -1.0, 0.0,//左顶点
+        	 0.5, -0.5, 0.0 //右顶点
         ];
 
        triangleBuffer = webgl.createBuffer();
-       webgl.bindBuffer(webgl.ARRAY_BUFFER, triangleBuffer);
-       webgl.bufferData(webgl.ARRAY_BUFFER, new Float32Array(jsArrayData), webgl.STATIC_DRAW);
+       webgl.bindBuffer(webgl.ARRAY_BUFFER, triangleBuffer);//2
+       webgl.bufferData(webgl.ARRAY_BUFFER, new Float32Array(jsArrayData), webgl.STATIC_DRAW);//3
 
-       webgl.clearColor(0.0, 0.0, 0.0, 1.0);//red,green,blue
+       webgl.clearColor(1.0, 1.0, 0.0, 1.0);//red,green,blue
        webgl.clear(webgl.COLOR_BUFFER_BIT);
 
-       webgl.bindBuffer(webgl.ARRAY_BUFFER, triangleBuffer);
+       webgl.bindBuffer(webgl.ARRAY_BUFFER, triangleBuffer);//2
 
-       webgl.enableVertexAttribArray(v3PositionIndex);
+       webgl.enableVertexAttribArray(v3PositionIndex);//4
 
-       webgl.vertexAttribPointer(v3PositionIndex, 3, webgl.FLOAT, false, 0, 0);
+       webgl.vertexAttribPointer(v3PositionIndex, 3, webgl.FLOAT, false, 0, 0);//5
 
-       webgl.drawArrays(webgl.TRIANGLES, 0, 3);
+       webgl.drawArrays(webgl.TRIANGLES, 0, 3);//6
 
     }
 </script>
