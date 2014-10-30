@@ -10,7 +10,7 @@ var VSHADER_SOURCE =
 // Fragment shader program
 var FSHADER_SOURCE =
   'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
+  '  gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);\n' +
   '}\n';
 
 function main() {
@@ -29,7 +29,7 @@ function main() {
     console.log('Failed to intialize shaders.');
     return;
   }
-
+ 
   // // Get the storage location of a_Position
   var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
   if (a_Position < 0) {

@@ -14,7 +14,7 @@
 <script id="shader-fs" type="x-shader/x-fragment">
         void main(void)
         {
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);//形状的颜色
         }
 </script>
 
@@ -79,18 +79,22 @@
        // 	 0.0, -1.0, 0.0,//左顶点
        // 	 0.5, -0.5, 0.0 //右顶点
        // ];
-        
+       // var jsArrayData = [
+      //  	 topx,  topy, topz,//上顶点
+       // 	 lx, ly, lz,//左顶点
+       // 	 rx, ry, rz //右顶点
+       // ];
         var jsArrayData = [
         	 topx,  topy, topz,//上顶点
-        	 lx, ly, lz,//左顶点
-        	 rx, ry, rz //右顶点
+        	 -0.5, -1.0, 0.0,//左顶点
+        	 0.5, -1.0, 0.0 //右顶点
         ];
 
        triangleBuffer = webgl.createBuffer();
        webgl.bindBuffer(webgl.ARRAY_BUFFER, triangleBuffer);//2
        webgl.bufferData(webgl.ARRAY_BUFFER, new Float32Array(jsArrayData), webgl.STATIC_DRAW);//3
 
-       webgl.clearColor(0.0, 0.0, 0.0, 1.0);//red,green,blue
+       webgl.clearColor(0.0, 0.0, 0.0, 1.0);//red,green,blue 背景的颜色
        webgl.clear(webgl.COLOR_BUFFER_BIT);
 
        webgl.bindBuffer(webgl.ARRAY_BUFFER, triangleBuffer);//2
@@ -103,9 +107,52 @@
 
     }
 </script>
+<script type="text/javascript">
+	var ws = null;
+	function log(text) {
+		document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
+	}
+	function startServer() {
+		Init(0.0,1.0,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0);
+		var url = document.getElementById("serverip").value;
+		if ('WebSocket' in window) {
+			ws = new WebSocket(url);
+		} else if ('MozWebSocket' in window) {
+			ws = new MozWebSocket(url);
+		} else {
+			log('浏览器不支持');
+			return;
+		}
+		ws.onopen = function() {
+			//log('Opened!');
+		};
+		ws.onmessage = function(event) {
+			//log(event.data);
+			var x_value =event.data.split(",")[0];
+			var y_value = event.data.split(",")[1];
+			//makedot(x_value,y_value); 
+			Init(x_value/800,y_value/800,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0)
+		};
+		ws.onclose = function() {
+			//log('Closed!');
+		}
+	}
+	function sendMessage() {
+		var textMessage = document.getElementById("textMessage").value;
+		if (ws != null && textMessage != "") {
+			ws.send(textMessage);
+		}
+	}
+	function stopconn() {
+		ws.close();
+	}
+</script>
 </head>
-<body onload='Init(0.5,0.5,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0)'>
+<body onload='startServer()'><!-- Init(0.5,0.5,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0) -->
+<input id="serverip" type="text" size="20" style="display:none"
+		value="ws://182.254.155.153:8080/webs/websocket/sline" />
 	<input type="button" onclick="Init(1.0,1.0,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0)" value="test"/>
     <canvas id="myCanvas" style="border:1px solid red;" width='601px' height='450px'></canvas>
+    <div id="log" style="display:none"></div>
 </body>
 </html>
