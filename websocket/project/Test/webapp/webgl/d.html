@@ -128,10 +128,13 @@
 		};
 		ws.onmessage = function(event) {
 			//log(event.data);
+			//console.log(event.data);
 			var x_value =event.data.split(",")[0];
 			var y_value = event.data.split(",")[1];
+			var z_value = event.data.split(",")[2];
+
 			//makedot(x_value,y_value); 
-			Init(x_value/800,y_value/800,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0)
+			Init(x_value,y_value,z_value,0.0,-1.0,0.0,0.5,-0.5,0.0)
 		};
 		ws.onclose = function() {
 			//log('Closed!');
@@ -150,9 +153,10 @@
 </head>
 <body onload='startServer()'><!-- Init(0.5,0.5,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0) -->
 <input id="serverip" type="text" size="20" style="display:none"
-		value="ws://182.254.155.153:8080/webs/websocket/sline" />
+		value="ws://182.254.155.153:8080/webs/websocket/test" />
 	<input type="button" onclick="Init(1.0,1.0,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0)" value="test"/>
     <canvas id="myCanvas" style="border:1px solid red;" width='601px' height='450px'></canvas>
-    <div id="log" style="display:none"></div>
+    <div id="log" style="display:block"></div>
+    
 </body>
 </html>
