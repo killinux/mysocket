@@ -57,10 +57,7 @@ public class HelloWorldWebSocketServlet extends WebSocketServlet {
 		protected void onBinaryMessage(ByteBuffer arg0) throws IOException {
 
 		}
-
-		@Override
-		protected void onTextMessage(CharBuffer message) throws IOException {
-
+		private void toOne(CharBuffer message) throws IOException{
 			System.out.println("onText--->" + message.toString());
 			
 			String[] msgarray= message.toString().split(",");
@@ -80,6 +77,19 @@ public class HelloWorldWebSocketServlet extends WebSocketServlet {
 					toUser.myoutbound.writeTextMessage(buffer);
 					toUser.myoutbound.flush();
 				}
+			}	
+		}
+		@Override
+		protected void onTextMessage(CharBuffer message) throws IOException {
+			System.out.println("onText--->" + message.toString());
+			String[] msgarray= message.toString().split(",");
+			for (Map.Entry<String, MyMessageInbound> entry : mmiList.entrySet()) {
+				System.out.println(entry.getKey()+"-----");
+				  MyMessageInbound mmib = (MyMessageInbound) entry.getValue(); 
+				  CharBuffer buffer = CharBuffer.wrap(message);
+				  System.out.println(buffer);
+	              mmib.myoutbound.writeTextMessage(buffer);
+	              mmib.myoutbound.flush();
 			}
 			
 			/*Socket socket;
