@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>basic example</title>
+</head>
+<body>
+<script src="jquery.min.js"></script>
+
+<!--<script type="text/javascript" src="../jquery.qrcode.min.js"></script>
+--><script type="text/javascript" src="../src/jquery.qrcode.js"></script>
+<script type="text/javascript" src="../src/qrcode.js"></script>
+
+<p>efan</p>
+<div id="qrcodeTable"></div>
+
+<script>
+	//jQuery('#qrcode').qrcode("this plugin is great");
+	jQuery('#qrcodeTable').qrcode({
+		render	: "table",
+		text	: "http://haoning.net/webs/iscroll/demos/snap/test.html"
+	});	
+	//jQuery('#qrcodeCanvas').qrcode({
+	//	text	: "http://42.62.73.61:8080/webs/sline.html"
+	//});	
+</script>
+
+</body>
+</html>
