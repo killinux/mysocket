@@ -22,6 +22,9 @@ function loaded () {
 }
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+function useCoupon(){
+	alert("购买，服务器回调出货，或者生成取货码");
+}
 </script>
 
 <style type="text/css">
@@ -140,7 +143,7 @@ body {
 			<li>
 				<div>优惠券编号123123</br>
 					宫保鸡丁饭</br></br>
-					<input type="button" value="使用">
+					<input type="button" value="使用" onclick="useCoupon()">
 				</div>
 			</li>
 			<li>Cell</li>
