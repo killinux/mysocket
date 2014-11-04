@@ -45,7 +45,24 @@
       <servlet-name>wsLine</servlet-name>
       <url-pattern>/websocket/sline</url-pattern>
     </servlet-mapping>
-   
+    
+	<servlet>
+      <servlet-name>couponcheck</servlet-name>
+      <servlet-class>com.hao.CouponRedis</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>couponcheck</servlet-name>
+      <url-pattern>/coupon/check</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+      <servlet-name>couponcheckset</servlet-name>
+      <servlet-class>com.hao.CouponRedisSet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>couponcheckset</servlet-name>
+      <url-pattern>/coupon/check</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

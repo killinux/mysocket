@@ -43,14 +43,14 @@
     var programObject = null;
     var triangleBuffer = null; 
     var v3PositionIndex = 0;
-
+//http://www.cnblogs.com/sanjin/p/3580331.html
     function Init(topx,topy,topz,lx,ly,lz,rx,ry,rz)
     {
         var myCanvasObject = document.getElementById('myCanvas');
         webgl = myCanvasObject.getContext("experimental-webgl");
-        webgl.viewport(0, 0, myCanvasObject.clientWidth, myCanvasObject.clientHeight);//canvas settting
+        webgl.viewport(0, 0, myCanvasObject.clientWidth, myCanvasObject.clientHeight);//canvas settting观察点
 
-        vertexShaderObject = webgl.createShader(webgl.VERTEX_SHADER);
+        vertexShaderObject = webgl.createShader(webgl.VERTEX_SHADER);//1 创建Shader
         fragmentShaderObject = webgl.createShader(webgl.FRAGMENT_SHADER);
 
         webgl.shaderSource(vertexShaderObject, ShaderSourceFromScript("shader-vs"));
@@ -62,9 +62,9 @@
         if(!webgl.getShaderParameter(vertexShaderObject, webgl.COMPILE_STATUS)){alert("error:vertexShaderObject");return;}
         if(!webgl.getShaderParameter(fragmentShaderObject, webgl.COMPILE_STATUS)){alert("error:fragmentShaderObject");return;}
 
-        programObject = webgl.createProgram();
+        programObject = webgl.createProgram();//2  创建Program
 
-        webgl.attachShader(programObject, vertexShaderObject);
+        webgl.attachShader(programObject, vertexShaderObject);//绑定shader到program 
         webgl.attachShader(programObject, fragmentShaderObject);
 
         webgl.bindAttribLocation(programObject, v3PositionIndex, "v3Position");
