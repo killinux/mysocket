@@ -18,11 +18,14 @@ public class CouponRedis  extends HttpServlet {
 		System.out.println("---------/coupon/check");
 		try {   
 			String machine_product_id = request.getParameter("machine_product_id"); 
-			String result =null;
+			String result ="0";
 			if(machine_product_id==null){
 				 result="0";
 			}else{
 				 result = jedis.get(machine_product_id); 
+				 if(result==null){
+					 result="0";
+				 }
 			}
 		    try {
 				response.getWriter().write(result);

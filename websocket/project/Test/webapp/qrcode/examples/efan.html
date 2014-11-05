@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>basic example</title>
+<title>efan</title>
 </head>
-<body>
 <script src="jquery.min.js"></script>
-
-<!--<script type="text/javascript" src="../jquery.qrcode.min.js"></script>
 --><script type="text/javascript" src="../src/jquery.qrcode.js"></script>
 <script type="text/javascript" src="../src/qrcode.js"></script>
 
-<p>efan</p>
+<p>efan qrcode</p>
 <div id="qrcodeTable"></div>
 
 <script>
@@ -24,30 +21,28 @@
 	//});	
 	function checkpay(){
 		 $.post(
-	        '/ajax/tv/pay',
+	        '/webs/coupon/check',
 	        {	
-	        	accountId : "100006335",
-	        	accountName : "0922@1.com", 
-	        	commodityId : "489", 
-	        	gatewayId : "18", 
-	        	gatewayPara : "bank:icbcb2c", 
-	        	mac : "macmac",
-	        	fck : "123456",
-	        	userAgent : "userAgent",
-	        	autoRenewal : "0",
-	        	payDutSign : "0", 
-	        	ticketCode : ""
+	        	machine_product_id : "abc",
 	        },
 	        function(data) {
-	        	console.log("ajax/tv/pay--->>>");
+	        	console.log("/webs/coupon/check--->>>");
 	        	console.log(data);
+	        	if(data==1){//返回成功,
+	        		//调用出货接口
+	        		alert("这里调用出货接口");
+	        		 window.location.href="success.html"; 
+	        	}else{
+	        		setTimeout("checkpay()", 2000 );
+	        	}
 	            return false;
 	        }
 	    ); 
-		setTimeout("checkpay()", 3000 );
+		//setTimeout("checkpay()", 3000 );
 	}
-	setTimeout("checkpay()", 3000 );
+	//setTimeout("checkpay()", 3000 );
 </script>
-
+<!-- <input type="button" onclick="checkpay()" value="test" /> -->
+<body onload="checkpay()">
 </body>
 </html>

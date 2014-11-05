@@ -23,7 +23,24 @@ function loaded () {
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 function useCoupon(){
-	alert("购买，服务器回调出货，或者生成取货码");
+	$.post(
+        '/webs/coupon/checkset',
+        {	
+        	machine_product_id : "abc",
+        },
+        function(data) {
+        	console.log("/webs/coupon/checkset-->>>");
+        	console.log(data);
+        	if(data=="OK"){//返回成功,
+        		//调用出货接口
+        		alert("已经出货请在机器口等待");
+        		document.getElementById("showmessage").style.display="block";
+        		document.getElementById("testbtn").style.display="none";
+        		// window.location.href="success.html"; 
+        	}
+           
+        }
+	//alert("购买，服务器回调出货，或者生成取货码");
 }
 </script>
 
@@ -142,8 +159,11 @@ body {
 		<ul>
 			<li>
 				<div>优惠券编号123123</br>
-					宫保鸡丁饭</br></br>
-					<input type="button" value="使用" onclick="useCoupon()">
+					面额 20元</br></br>
+					<input type="button" value="使用" onclick="useCoupon()" id="usebtn">
+				</div>
+				<div id="showmessage" style="display:none">
+				购买成功
 				</div>
 			</li>
 			<li>Cell</li>
