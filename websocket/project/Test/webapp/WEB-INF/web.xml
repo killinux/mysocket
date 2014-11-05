@@ -61,7 +61,7 @@
     </servlet>
     <servlet-mapping>
       <servlet-name>couponcheckset</servlet-name>
-      <url-pattern>/coupon/check</url-pattern>
+      <url-pattern>/coupon/checkset</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

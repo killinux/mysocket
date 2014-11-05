@@ -24,26 +24,26 @@
 	//});	
 	function checkpay(){
 		 $.post(
-			        '/ajax/tv/pay',
-			        {	
-			        	accountId : "100006335",
-			        	accountName : "0922@1.com", 
-			        	commodityId : "489", 
-			        	gatewayId : "18", 
-			        	gatewayPara : "bank:icbcb2c", 
-			        	mac : "macmac",
-			        	fck : "123456",
-			        	userAgent : "userAgent",
-			        	autoRenewal : "0",
-			        	payDutSign : "0", 
-			        	ticketCode : ""
-			        },
-			        function(data) {
-			        	console.log("ajax/tv/pay--->>>");
-			        	console.log(data);
-			            return false;
-			        }
-			    ); 
+	        '/ajax/tv/pay',
+	        {	
+	        	accountId : "100006335",
+	        	accountName : "0922@1.com", 
+	        	commodityId : "489", 
+	        	gatewayId : "18", 
+	        	gatewayPara : "bank:icbcb2c", 
+	        	mac : "macmac",
+	        	fck : "123456",
+	        	userAgent : "userAgent",
+	        	autoRenewal : "0",
+	        	payDutSign : "0", 
+	        	ticketCode : ""
+	        },
+	        function(data) {
+	        	console.log("ajax/tv/pay--->>>");
+	        	console.log(data);
+	            return false;
+	        }
+	    ); 
 		setTimeout("checkpay()", 3000 );
 	}
 	setTimeout("checkpay()", 3000 );
