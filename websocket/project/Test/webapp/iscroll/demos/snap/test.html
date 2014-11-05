@@ -7,12 +7,12 @@
 <title>欢迎使用efan优惠券</title>
 
 <script type="text/javascript" src="../../build/iscroll.js"></script>
-
+<script type="text/javascript" src="jquery-1.7.2.js"></script>
 <script type="text/javascript">
-//hao
+
 var myScroll;
 
-function loaded () {
+function loaded() {
 	myScroll = new IScroll('#wrapper', {
 		scrollX: true,
 		scrollY: true,
@@ -22,26 +22,7 @@ function loaded () {
 }
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-function useCoupon(){
-	$.post(
-        '/webs/coupon/checkset',
-        {	
-        	machine_product_id : "abc",
-        },
-        function(data) {
-        	console.log("/webs/coupon/checkset-->>>");
-        	console.log(data);
-        	if(data=="OK"){//返回成功,
-        		//调用出货接口
-        		alert("已经出货请在机器口等待");
-        		document.getElementById("showmessage").style.display="block";
-        		document.getElementById("testbtn").style.display="none";
-        		// window.location.href="success.html"; 
-        	}
-           
-        }
-	//alert("购买，服务器回调出货，或者生成取货码");
-}
+
 </script>
 
 <style type="text/css">
@@ -150,6 +131,29 @@ body {
 }
 
 </style>
+<script type="text/javascript" >
+function useCoupon(){
+	$.post(
+        '/webs/coupon/checkset',
+        {	
+        	machine_product_id : "abc",
+        },
+        function(data) {
+        	console.log("/webs/coupon/checkset-->>>");
+        	console.log(data);
+        	if(data=="OK"){//返回成功,
+        		//调用出货接口
+        		alert("已经出货请在机器口等待");
+        		document.getElementById("showmessage").style.display="block";
+        		document.getElementById("usebtn").style.display="none";
+        		// window.location.href="success.html"; 
+        	}
+           
+        }
+     );
+	//alert("购买，服务器回调出货，或者生成取货码");
+}
+</script>
 </head>
 <body onload="loaded()">
 <div id="header">efan优惠券</div>
