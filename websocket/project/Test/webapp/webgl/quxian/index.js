@@ -73,7 +73,7 @@
 	
 	gl.depthFunc(gl.ALWAYS);
 	
-    // アルファブレンド
+    // 
 	function setAlphaBlend(gl) {
 		gl.blendEquation(gl.FUNC_ADD);
 		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -90,7 +90,7 @@
 //		gl.clearColor(0.0, 0.0, 1.0, 0.2);
 //		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 		
-        // 塗りつぶし
+        
         fill.uniform['color'].value = clearColor;
         gl.useProgram(fill);
         setupUniform(fill);
@@ -98,7 +98,7 @@
 		setAlphaBlend(gl);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
         
-        // 点の描画
+        //绘图
 		program.uniform['mvMatrix'].value = matrix.mvMatrix.data;
 		program.uniform['pMatrix'].value = matrix.pMatrix.data;
 		program.uniform['time'].value = frame * speed;

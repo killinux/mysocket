@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/Server.java=GBK
+encoding//src/com/efan/dao/DBEngine.java=UTF-8
+encoding//src/com/efan/dao/DBFactory.java=UTF-8
+encoding//src/com/efan/dao/ResultPage.java=UTF-8
 encoding//webapp/baidu/badu.html=GBK
 encoding//webapp/iscroll/demos/snap/coupon.jsp=UTF-8
 encoding//webapp/qrcode/examples/efan.html=GBK

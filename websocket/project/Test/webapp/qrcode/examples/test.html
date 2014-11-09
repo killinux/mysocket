@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery.min.js"></script>
+<script type="text/javascript" src="../src/jquery.qrcode.js"></script>
+<script type="text/javascript" src="../src/qrcode.js"></script>
+<title>efa1n</title>
+</head>
+<body >
+
+
+<p>etest111</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="qrcodeTable"></div>
+
+<script>
+	jQuery('#qrcodeTable').qrcode({
+		render	: "table",
+		text	: "http://192.168.0.102:8080/webs/jm/demos/swipe-list/swip.html"
+	});	
+
+</script>
+
+</body>
+</html>

@@ -24,5 +24,6 @@
 	<classpathentry kind="lib" path="libclient/tomcat7-websocket.jar"/>
 	<classpathentry kind="lib" path="libclient/websocket-api.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jedis-2.1.0.jar" sourcepath="D:/c/apache-maven-3.2.2/repo/redis/clients/jedis/2.1.0/jedis-2.1.0-sources.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jutil-1.0.2-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
