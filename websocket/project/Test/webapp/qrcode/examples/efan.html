@@ -12,10 +12,15 @@
 
 <script>
 	//jQuery('#qrcode').qrcode("this plugin is great");
+	var mechine_id=Math.round(Math.random()*1000);   //"haoning";//m按照规则随机生成，保证不会重复
+	//var url="http://haoning.net/webs/jm/demos/swipe-list/swip.jsp?m="+mechine_id;
+	var url="http://haoning.net/webs/q.jsp?m="+mechine_id+"&u=2";
 	jQuery('#qrcodeTable').qrcode({
 		render	: "table",
-		text	: "http://haoning.net/webs/iscroll/demos/snap/test.html"
+		//text	: "http://haoning.net/webs/iscroll/demos/snap/test.html"
+		text	: url
 	});	
+	
 	//jQuery('#qrcodeCanvas').qrcode({
 	//	text	: "http://42.62.73.61:8080/webs/sline.html"
 	//});	
@@ -23,14 +28,14 @@
 		 $.post(
 	        '/webs/coupon/check',
 	        {	
-	        	machine_product_id : "abc",
+	        	machine_product_id : mechine_id,
 	        },
 	        function(data) {
 	        	console.log("/webs/coupon/check--->>>");
 	        	console.log(data);
 	        	if(data==1){//返回成功,
 	        		//调用出货接口
-	        		alert("这里调用出货接口");
+	        		//alert("这里调用出货接口");
 	        		 window.location.href="success.html"; 
 	        	}else{
 	        		setTimeout("checkpay()", 2000 );

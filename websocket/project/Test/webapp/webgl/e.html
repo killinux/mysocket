@@ -1,0 +1,119 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312">
+
+<script type="text/javascript" src="glMatrix-0.9.5.js"></script>
+
+<script type="text/javascript">
+	function CreateShader(gl, shaderType, shaderSRCString)//gl.FRAGMENT_SHADER, gl.VERTEX_SHADER
+	{
+		var shader = gl.createShader(shaderType);
+		if (shader) {
+			gl.shaderSource(shader, shaderSRCString);
+			gl.compileShader(shader);
+
+			if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+				gl.deleteShader(shader);
+				alert(gl.getShaderInfoLog(shader));
+				return null;
+			}
+		}
+		return shader;
+	}
+
+	function CreateBufferByJS1DArray(gl, vertices, verticeSize, verticeCount) {
+		var buffer = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices),
+				gl.STATIC_DRAW);
+		buffer.itemSize = verticeSize;
+		buffer.numItems = verticeCount;
+		return buffer;
+	}
+
+	var canvas = null;
+	var gl = null;
+	var program = null;
+	var vertexShader = null;
+	var fragmentShader = null;
+	var v3PositionIndex = 0;
+	var triangleBuffer = null;
+
+	function WebGL_Run(canvasId) {
+		try {
+			canvas = document.getElementById(canvasId);
+			if (canvas == null)
+				throw ('错误：画布"' + canvasId + '"不存在!');
+
+			gl = canvas.getContext("experimental-webgl");
+			if (gl == null)
+				throw ('失败:创建WebGL!');
+
+			gl.viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
+			gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+			program = gl.createProgram();
+			if (program == null)
+				throw ("失败:创建Program!");
+
+			var vertexShaderSource = "attribute vec3 v3Position;void main(void){gl_Position = vec4(v3Position, 1.0);}";
+			vertexShader = CreateShader(gl, gl.VERTEX_SHADER,
+					vertexShaderSource);
+			if (vertexShader == null)
+				throw ("失败:创建VERTEX_SHADER(" + vertexShaderSource + ")!");
+
+			var fragmentShaderSource = "void main(void){gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);}";
+			fragmentShader = CreateShader(gl, gl.FRAGMENT_SHADER,
+					fragmentShaderSource);
+			if (fragmentShader == null)
+				throw ("失败:创建FRAGMENT_SHADER(" + fragmentShaderSource + ")!");
+
+			gl.attachShader(program, vertexShader);
+			gl.attachShader(program, fragmentShader);
+			gl.bindAttribLocation(program, v3PositionIndex, "v3Position");
+			gl.linkProgram(program);
+			if (!gl.getProgramParameter(program, gl.LINK_STATUS))
+				throw ("失败:初始化SHADER!");
+			gl.useProgram(program);
+
+			gl.enableVertexAttribArray(v3PositionIndex);
+
+			triangleBuffer = CreateBufferByJS1DArray(gl, [ 0.0, 1.0, 0.0, -0.5,
+					-1.0, 0.0, 1.0, -0.5, 0.0 ], 3, 3);
+
+			DrawScene();
+		} catch (e) {
+			if (program)
+				gl.deleteProgram(program);
+			if (vertexShader)
+				gl.deleteShader(vertexShader);
+			if (fragmentShader)
+				gl.deleteShader(fragmentShader);
+			if (triangleBuffer)
+				gl.deleteBuffer(triangleBuffer);
+
+			alert(e);
+		}
+	}
+
+	function DrawScene() {
+		gl.clear(gl.COLOR_BUFFER_BIT);
+
+		gl.bindBuffer(gl.ARRAY_BUFFER, triangleBuffer);
+		gl.vertexAttribPointer(v3PositionIndex, triangleBuffer.itemSize,
+				gl.FLOAT, false, 0, 0);
+		gl.drawArrays(gl.TRIANGLES, 0, triangleBuffer.numItems);
+	}
+</script>
+
+</head>
+
+
+<body onload="WebGL_Run('canvas');">
+	<canvas id="canvas" style="border: 1px solid black;" width='300px'
+		height='300px'></canvas>
+</body>
+
+</html>
+
+
