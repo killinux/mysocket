@@ -15,9 +15,10 @@ public class CouponRedis  extends HttpServlet {
 			throws ServletException, IOException {
 		//response.setContentType("text/html;charset=GB2312"); // 这条语句指明了向客户端发送的内容格式和采用的字符编码．
 		Jedis jedis = new Jedis("haoning.net",6379); //连接池略
-		System.out.println("---------/coupon/check");
+		
 		try {   
 			String machine_product_id = request.getParameter("machine_product_id"); 
+			System.out.println("---------/coupon/check:"+machine_product_id);
 			String result ="0";
 			if(machine_product_id==null){
 				 result="0";

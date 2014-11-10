@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_05"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_45"/>
 	<classpathentry kind="lib" path="libclient/annotations-api.jar"/>
 	<classpathentry kind="lib" path="libclient/catalina-ant.jar"/>
 	<classpathentry kind="lib" path="libclient/catalina-ha.jar"/>
@@ -25,5 +25,7 @@
 	<classpathentry kind="lib" path="libclient/websocket-api.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jedis-2.1.0.jar" sourcepath="D:/c/apache-maven-3.2.2/repo/redis/clients/jedis/2.1.0/jedis-2.1.0-sources.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jutil-1.0.2-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mysql-connector-java-5.1.26.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/proxool-0.8.3.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
