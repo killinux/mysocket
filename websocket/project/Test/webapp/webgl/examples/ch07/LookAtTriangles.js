@@ -57,6 +57,9 @@ function main() {
   // Set the matrix to be used for to set the camera view
   var viewMatrix = new Matrix4();
   viewMatrix.setLookAt(0.20, 0.25, 0.25, 0, 0, 0, 0, 1, 0);
+  //视点，0.20, 0.25, 0.25
+  //观察点，0, 0, 0
+  //上方向0, 1, 0 y轴正方向
 
   // Set the view matrix
   gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);

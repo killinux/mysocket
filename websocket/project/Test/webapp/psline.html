@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>thisline</title>
+</head>
+<script type="text/javascript"> 
+//--------------line----begin-------
+	var w=1; 
+	var h=1; 
+	var col="blue"; 
+	function catchMouse(){ 
+	    var x=event.clientX-50; 
+	    var y=event.clientY-52; 
+	   // makedot(x,y); 
+	    if (ws != null) {
+	    	ws.send(x+","+y);
+		}
+	} 
+	function makedot(x,y){ 
+	    var sp=document.getElementById("sspp"); 
+	    sp.insertAdjacentHTML("BeforeEnd","<hr style='position:absolute;left:"+x+"px;top:"+y+"px;width:"+w+"px;height:"+h+"px;color:"+col+";'>"); 
+	} 
+	function myMouseDown(){
+		document.onmousemove=catchMouse
+	}
+	function myMouseUp(){
+		document.onmousemove=null;
+	}
+//--------------line----end---------
+</script>
+<script type="text/javascript">
+	var ws = null;
+	function log(text) {
+		document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
+	}
+	function startServer() {
+		var url = document.getElementById("serverip").value;
+		if ('WebSocket' in window) {
+			ws = new WebSocket(url);
+		} else if ('MozWebSocket' in window) {
+			ws = new MozWebSocket(url);
+		} else {
+			log('浏览器不支持');
+			return;
+		}
+		ws.onopen = function() {
+			//log('Opened!');
+		};
+		ws.onmessage = function(event) {
+			//log(event.data);
+			var x_value =event.data.split(",")[0];
+			var y_value = event.data.split(",")[1];
+			makedot(x_value,y_value); 
+		};
+		ws.onclose = function() {
+			//log('Closed!');
+		}
+	}
+	function sendMessage() {
+		var textMessage = document.getElementById("textMessage").value;
+		if (ws != null && textMessage != "") {
+			ws.send(textMessage);
+		}
+	}
+	function stopconn() {
+		ws.close();
+	}
+</script>
+	
+ 
+<body onload="startServer()">
+
+<input id="serverip" type="text" size="20" style="display:none"
+		value="ws://42.62.73.61:9000" />
+<div id="log" style="display:none"></div>
+<span id="sspp" onMouseDown="myMouseDown()" onMouseUp="myMouseUp()" style="position:absolute;top:50px;left:50px;width:1000px;height:1000px;background-color:#eeeeee "> 
+</span>
+</body>
+</html>
