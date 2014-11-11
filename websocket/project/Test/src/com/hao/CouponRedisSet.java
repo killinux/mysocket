@@ -27,13 +27,20 @@ public class CouponRedisSet  extends HttpServlet {
 			System.out.println("machine_product_id:"+machine_product_id);
 			System.out.println("user_id:"+user_id);
 			System.out.println("coupon_id:"+coupon_id);
-			setCoupon(user_id,coupon_id);
+			
 			String result =null;
 			if(machine_product_id==null){
 				 result="0";
 			}else{
 				 //修改数据库 -1 操作
-				 result=jedis.set(machine_product_id,"1"); 
+				 result=jedis.get(machine_product_id); 
+				 if("1".equals(result)){//已经买过
+					 result="-2";
+				 }else{
+					 result=jedis.set(machine_product_id,"1"); 
+					 setCoupon(coupon_id,user_id);//todo 如果没成功的出错处理
+				 }
+				
 				 System.out.println(result);
 			}
 		    try {

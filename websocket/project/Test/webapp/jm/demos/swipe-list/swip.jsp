@@ -108,10 +108,13 @@ $( document ).on( "pagecreate", "#demo-page", function() {
 			        	if(data=="OK"){//返回成功,
 			        		//调用出货接口
 			        		alert("已经出货请在机器口等待");
+			        		window.location.reload();
 			        		// window.location.href="success.html"; 
+			        	}else if(data=="-2"){
+			        		alert("已经出货.");//，如果出现问题，请给二维码拍照，以便退款
 			        	}else{
 			        		alert("网络问题，请稍后重试");
-			        	} 
+			        	}
 			        }
 			     );
 				listitem
