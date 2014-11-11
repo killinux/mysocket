@@ -74,8 +74,6 @@
 		ws.onclose = function() {
 			log('Closed! 刷新页面尝试连接.');
 		}
-		//document.getElementById("conbtn").disabled = "true";
-		//document.getElementById("stopbtn").removeAttribute('disabled');
 	}
 	function sendMessage() {
 		var textMessage = document.getElementById("textMessage").value;
@@ -88,18 +86,16 @@
 	}
 	function stopconn() {
 		ws.close();
-		//document.getElementById("conbtn").removeAttribute('disabled');
-		//document.getElementById("stopbtn").disabled = "true";
 	}
 </script>
 <body onload="startServer()">
 	 
-	 <input id="serverip" type="hidden" size="20"
-		value="ws://42.62.73.61:9000" />
+	 <input id="serverip" type="text" size="20"
+		value="ws://182.254.155.153:9000" />
 	
 	</br>
 	您的Id：<input id="username" type="text"  readonly/></br>
-	to Id：<input id="toUser" type="text"  /> 如果为空则群发</br>
+	<!-- to Id：<input id="toUser" type="text"  /> 如果为空则群发</br> -->
 	<input id="textMessage" type="text" size="20" onkeydown="enterSend()"  style="border:1;width:400px"  />
 	<input id="sendbtn" type="button" onclick="sendMessage()" value="Send">
 	<div id="log"></div>
