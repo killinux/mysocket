@@ -23,8 +23,11 @@ public class CouponRedisSet  extends HttpServlet {
 		try {   
 			String machine_product_id = request.getParameter("machine_product_id"); 
 			String user_id = request.getParameter("user_id"); 
-			String channel_id = request.getParameter("channel_id"); 
-			
+			String coupon_id = request.getParameter("coupon_id"); 
+			System.out.println("machine_product_id:"+machine_product_id);
+			System.out.println("user_id:"+user_id);
+			System.out.println("coupon_id:"+coupon_id);
+			setCoupon(user_id,coupon_id);
 			String result =null;
 			if(machine_product_id==null){
 				 result="0";
@@ -46,17 +49,14 @@ public class CouponRedisSet  extends HttpServlet {
 			
 		}  
 	}
-	private int setCoupon(String user_id,String channel_id){
+	private int setCoupon(String coupon_id,String user_id){
 		int result=-1;
 		try{
 			DBEngine dbe = new DBEngine("efan",false);
-			String sql="select ott_app.*,ott_channel_app_rel.app_weight " +
-					"from ott_app ,ott_channel_app_rel " +
-					"where " +
-					" ott_app.pub_status = 'P' " +
-					"  and ott_app.id = ott_channel_app_rel.app_id" +
-					" and ott_channel_app_rel.channel_id = '"+user_id+"'";
+			String sql="update ott_channel_app_rel set app_weight = (app_weight - 1) where app_id='"+coupon_id+"' and channel_id ='"+user_id+"'";
+			System.out.println("setCoupon:"+sql);
 			result = dbe.executeUpdate(sql);
+			
 		}
 		catch (Exception e)
 		{

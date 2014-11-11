@@ -56,18 +56,19 @@ catch (Exception e)
 <script src="../_assets/js/index.js"></script>
 <script src="../js/jquery.mobile-1.4.5.min.js"></script>
 <script  type="text/javascript">
+
 $( document ).on( "pagecreate", "#demo-page", function() {
 
 	// Swipe to remove list item
-	$( document ).on( "swipeleft swiperight", "#list li", function( event ) {
+	 $( document ).on( "swipeleft swiperight", "#list li", function( event ) {
 		var listitem = $( this ),
 			// These are the classnames used for the CSS transition
 			dir = event.type === "swipeleft" ? "left" : "right",
 			// Check if the browser supports the transform (3D) CSS transition
 			transition = $.support.cssTransform3d ? dir : false;
-
-			confirmAndDelete( listitem, transition );
-	});
+			//alert(listitem.children("input")[0].value);
+			confirmAndDelete( listitem, transition ,listitem.children("input")[0].value);
+	}); 
 
 	// If it's not a touch device...
 	if ( ! $.mobile.support.touch ) {
@@ -82,8 +83,7 @@ $( document ).on( "pagecreate", "#demo-page", function() {
 			confirmAndDelete( listitem );
 		});
 	}
-
-	function confirmAndDelete( listitem, transition ) {
+	function confirmAndDelete( listitem, transition ,coupon_id) {
 		// Highlight the list item that will be removed
 		listitem.children( ".ui-btn" ).addClass( "ui-btn-active" );
 		// Inject topic in confirmation popup after removing any previous injected topics
@@ -99,6 +99,8 @@ $( document ).on( "pagecreate", "#demo-page", function() {
 			        '/webs/coupon/checkset',
 			        {	
 			        	machine_product_id : "<%=mechine_id%>",
+			        	user_id :"<%=user_id%>",
+			        	coupon_id : coupon_id
 			        },
 			        function(data) {
 			        	console.log("/webs/coupon/checkset-->>>");
@@ -140,39 +142,7 @@ $( document ).on( "pagecreate", "#demo-page", function() {
 		});
 	}
 });
-/* function getData(){
-	$.post(
-		    '/efan-admin/open/getC',
-		    {	
-		    	u : "2",
-		    },	
-		    function(data) {
-		    	//console.log("ajax/tv/pay--->>>");
-		    	//console.log(data);
-		    	
-		    	var list =  data.list;
-		    	console.table(list);
-		    	for(var i=0;i<list.length;i++){
-		    		console.log(list[i].name);
-		    		var htmlStr = [
-		    		               '<li>',
-			    		               '<a href="#demo-mail">',
-				    		               ' <h3>aaaa</h3>',
-				    		               ' <p class="topic"><strong>Re:bbbb</strong></p>',
-				    		               ' <p>Sure, let\'s plan on meeting at Highland Kitchen at 8:00 tonight. Can\'t wait! </p>',
-				    		               ' <p class="ui-li-aside"><strong>4:48</strong>PM</p>',
-			    		               '</a>',
-			    		               '<a href="#" class="delete">Delete</a>',
-		    		               '</li> ' 
-		    		             ].join('');
-		    		$("#list_coupon").html($("#list_coupon").html()+'<li><a href="#demo-mail"><h3>Avery Walker</h3><p class="topic"><strong>Re: Dinner Tonight</strong></p><p>Sure, let\'s plan on meeting at Highland Kitchen at 8:00 tonight. Can\'t wait! </p><p class="ui-li-aside"><strong>4:48</strong>PM</p></a><a href="#" class="delete">Delete</a></li>');
-		    	}
-		    	//console.log(list.length);
-		    	//console.table(list[0])
-		        return false;
-		    }
-		);
-} */
+
 </script>
 </head>
 <body>
@@ -199,12 +169,13 @@ $( document ).on( "pagecreate", "#demo-page", function() {
 	        for(int i=0;i<list.size();i++){
 	        	Map thisMap=(Map)list.get(i);
 	        %>
-	        <li>
+	        <li id='<%=thisMap.get("id") %>'>
+	        	<input type="hidden" value="<%=thisMap.get("id") %>" />
 	        	<a href="#demo-mail">
                     <h3>优惠券</h3>
                     <p class="topic"><strong><%=thisMap.get("name") %></strong></p>
                     <p> 数量：<%=thisMap.get("app_weight") %></p>
-                    <p class="ui-li-aside"><strong>优惠券</strong></p>
+                    <p class="ui-li-aside"><strong>优惠券ID:</strong><%=thisMap.get("id") %></p>
                 </a>
                 <a href="#" class="delete">Delete</a>
 	        </li>
