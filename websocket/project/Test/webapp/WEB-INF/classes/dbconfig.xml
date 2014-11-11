@@ -1,0 +1,13 @@
+<dbconfig>
+	<connection name="efan">
+		<type value="Proxool" />
+		<host value="182.254.155.153" />
+		<port value="3306" />
+		<user value="root" />
+		<password value="haoning" />
+		<db value="ott_launcher_market" />
+		<maximum-connection-count value="10" />
+		<maximum-connection-lifetime value="3600000" />
+		<minimum-connection-count value="1" />
+	</connection>
+</dbconfig>
