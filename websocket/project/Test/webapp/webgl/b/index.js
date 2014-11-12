@@ -9,7 +9,7 @@ var globle_z= 10;
 function startServer() {
 	//var url = document.getElementById("serverip").value;
 	if ('WebSocket' in window) {
-		ws = new WebSocket("ws://192.168.0.102:8080/webs/websocket/sline");
+		ws = new WebSocket("ws://haoning.net/webs/websocket/sline");
 	} else if ('MozWebSocket' in window) {
 		ws = new MozWebSocket(url);
 	} else {
