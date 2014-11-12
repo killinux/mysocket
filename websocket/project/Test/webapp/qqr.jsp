@@ -1,1 +1,1 @@
-qq return
+qq login success return
