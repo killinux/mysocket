@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title></title>
+<script src="/js/jquery-1.4.2.js" type="text/javascript"></script>
+<script type="text/javascript"
+	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+	data-appid="153670266"
+	data-redirecturi="http://haoning.net/webs/test.jsp" charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+	charset="utf-8" data-callback="true"></script>
+</head>
+<body>
+	<form id="form1" runat="server">
+		<span id="qqLoginBtn"></span>
+		<script type="text/javascript">
+			QC.Login({
+				btnId : "qqLoginBtn" //插入按钮的节点id  
+			});
+		</script>
+
+		<script type="text/javascript">
+			//从页面收集OpenAPI必要的参数。get_user_info不需要输入参数，因此paras中没有参数  
+			var paras = {};
+
+			//用JS SDK调用OpenAPI  
+			QC.api("get_user_info", paras)
+			//指定接口访问成功的接收函数，s为成功返回Response对象  
+			.success(function(s) {
+				//成功回调，通过s.data获取OpenAPI的返回数据  
+				alert("获取用户信息成功！当前用户昵称为：" + s.data.nickname);
+			})
+			//指定接口访问失败的接收函数，f为失败返回Response对象  
+			.error(function(f) {
+				//失败回调  
+				alert("获取用户信息失败！");
+			})
+			//指定接口完成请求后的接收函数，c为完成请求返回Response对象  
+			.complete(function(c) {
+				//完成请求回调  
+				alert("获取用户信息完成！");
+			});
+		</script>
+
+		<script type="text/javascript">
+			if (QC.Login.check()) {//如果已登录  
+				QC.Login.getMe(function(openId, accessToken) {
+					alert([ "当前登录用户的", "openId为：" + openId,
+							"accessToken为：" + accessToken ].join("\n"));
+					$("#hidopenId").attr("value", openId);
+					$("#hidaccessToken").attr("value", accessToken);
+				});
+				//这里可以调用自己的保存接口  
+				//...  
+			}
+
+			function ContAdd() {
+				var openId = $("#hidopenId").val();
+				var accessToken = $("#hidaccessToken").val();
+
+				$.ajax({
+					type : "POST",
+					url : "ajaxbackInfo.aspx",
+					data : "openId=" + openId + "&accessToken=" + accessToken
+							+ "",
+					success : function(result) {
+						alert("aa" + result);
+					}
+				});
+			}
+		</script>
+		</div>
+		<input type="hidden" ID="hidopenId" /> <input type="hidden" ID=" hidaccessToken"  />
+		<br /> <input type="button" value="提 交" id="btnSubmit"
+			onclick="ContAdd();" />
+	</form>
+</body>
+</html>

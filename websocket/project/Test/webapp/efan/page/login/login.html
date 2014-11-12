@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" manifest="/rtw/ott.appcache">
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, target-densitydpi=high-dpi">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <title>移动端登录</title>
+    <link href="../../rtw/css/login/acc_bd2e1d6e.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="mblogin-main">
+    <div class="switch-tab">
+        <a href="javascript:;" class="tab-login current">登录</a>
+        <a href="javascript:;" class="tab-reg">注册</a>
+    </div>
+    <div class="login-form">
+        <div class="trd-login">
+            <label class="trd-login-lb">使用合作网站账号登录</label>
+            <p><a href="{plat_qq}" class="qq"><i class="icon-qq"></i><span>&nbsp;腾讯QQ登录</span></a></p>
+            <p><a href="{plat_sina}" class="sina"><i class="icon-weibo"></i><span>&nbsp;新浪微博登录</span></a></p>
+            <p><a href="javascript:;" class="fun" id="funlogin"><i class=""><!-- icon-funshion --></i><span>&nbsp;账号登录</span></a></p>
+        </div>
+        <div class="fun-login">
+            <span class="fun-login-lb">账号登录：</span><span id="ltips" class="fun-login-warning"></span>
+            <p>
+                <label for="lusername" id="for-lusername" class="for-lusername">邮箱/用户名/手机号</label>
+                <input type="text" id="lusername" name="lusername" class="inputstyle" />
+            </p>
+            <p>
+                <label for="lpassword" id="for-lpassword" class="for-lpassword">密码</label>
+                <input type="password" id="lpassword" name="lpassword" class="inputstyle" />
+            </p>
+            <p>
+                <input type="hidden" id="lqrcode" name="lqrcode" value="{q}"/>
+                <a id="lsbmt" href="###" class="fun">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+            </p>
+            <p>
+                <a id="chg" href="javascript:;">选择其他登录方式></a>
+            </p>
+        </div>
+        <div class="fun-reg">
+            <span class="fun-reg-lb">账号注册：</span><span id="rtips" class="fun-reg-warning"></span>
+            <p>
+                <label for="rusername" id="for-rusername" class="for-rusername">邮箱</label>
+                <input type="text" id="rusername" name="rusername" class="inputstyle" />
+            </p>
+            <p>
+                <label for="rpassword" id="for-rpassword" class="for-rpassword">密码</label>
+                <input type="password" id="rpassword" name="rpassword" class="inputstyle" />
+            </p>
+            <p>
+                <label for="rrepassword" id="for-rrepassword" class="for-rrepassword">确认密码</label>
+                <input type="password" id="rrepassword" name="rrepassword" class="inputstyle" />
+            </p>
+            <p>
+                <input type="hidden" id="rqrcode" name="rqrcode" value="{q}"/>
+                <a id="rsbmt" href="###" class="fun">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- <script type="text/javascript" charset="utf-8" src="http://172.16.12.95:8132/livereload.js"></script> -->
+</body>
+<script type="text/javascript" src="jquery-1.7.2.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    (function() {
+        var $content = $(".mblogin-main .login-form p span"), $box = $(".mblogin-main .login-form a");
+        var resizeMap = {};
+        resizeMap['.mblogin-main input.inputstyle'] = ['font-size', 'height', 'padding'];
+        resizeMap['.trd-login-lb'] = ['font-size'];
+        resizeMap['.login-form a'] = ['font-size', 'height', 'line-height'];
+        resizeMap['.mblogin-main .switch-tab'] = ['width', 'height'];
+        resizeMap['.mblogin-main .switch-tab a'] = ['font-size', 'line-height', 'width', 'height'];
+        resizeMap['.fun-login-lb'] = ['font-size'];
+        resizeMap['.fun-reg span.fun-reg-lb'] = ['font-size'];
+        resizeMap['.fun-login .for-lusername'] = ['font-size'];
+        resizeMap['.fun-login .for-lpassword'] = ['font-size'];
+        resizeMap['.fun-reg .for-rusername'] = ['font-size'];
+        resizeMap['.fun-reg .for-rpassword'] = ['font-size'];
+        resizeMap['.fun-reg .for-rrepassword'] = ['font-size'];
+        var resize = function(r) {
+            $.each(r, function(e, s) {
+                var css = {};
+                $.each(s, function(i, v) {
+                    css[v] = parseInt(parseInt($(e).css(v))*0.65) + 'px';
+                });
+                $(e).css(css);
+            });
+            $('.mblogin-main input.inputstyle').css('width', '90%');
+            $('.mblogin-main .switch-tab').css('margin', '2px auto 30px auto');
+            $('.fun-login .for-lusername').css('top', '70px');
+            $('.fun-login .for-lpassword').css('top', '140px');
+            $('.fun-reg .for-rusername').css('top', '70px');
+            $('.fun-reg .for-rpassword').css('top', '140px');
+            $('.fun-reg .for-rrepassword').css('top', '214px');
+            $('#chg').css('font-size', '20px');
+        };
+        var gap = $box.width() - $content.width();
+        if(gap <= 76) {
+            resize(resizeMap);
+        }
+    })();
+    var searchTip = function(q, for_q){
+        q = $('#'+q), for_q = $('#'+for_q);
+        if(q === null || for_q === null) return;
+        for_q.show();
+        var bl = function(o){
+            for_q.hide();
+            if(o.attr('rel') && o.val() === ''){
+                o.val(o.attr('rel'));
+                o.select();
+            }
+        };
+
+        q.on('focus', function(){bl(q);});
+        q.on('blur',function(){if($.trim(q.val()).length === 0) for_q.show();else for_q.hide();});
+        for_q.on('click', function(){for_q.hide();q.focus();});
+
+        // 验证是否需要显示提示框
+        if($.trim(q.val()).length) bl(q);
+    };
+    var toggle = function($obj) {
+        $obj.click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $login = $('.fun-login'), $trd_login = $('.trd-login');
+            $trd_login.toggle();
+            $login.toggle(500);
+            searchTip('lusername', 'for-lusername');
+            searchTip('lpassword', 'for-lpassword');
+        });
+        return false;
+    };
+    toggle($('#funlogin'));
+    toggle($('#chg'));
+
+    (function() {
+        var showLogin = function() {
+            $('title').text('移动端登录');
+            $('.fun-reg').hide();
+            $('.fun-login').hide();
+            $('.trd-login').show();
+        };
+        var showReg = function() {
+            $('.fun-login').hide();
+            $('.trd-login').hide();
+            $('.fun-reg').show();
+            $('title').text('移动端注册');
+            searchTip('rusername', 'for-rusername');
+            searchTip('rpassword', 'for-rpassword');
+            searchTip('rrepassword', 'for-rrepassword');
+        };
+        var $tab = $('.switch-tab a');
+        $.each($tab, function(i, e) {
+            $(e).click(function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                var beforeObj = $tab[(1 - i)];
+                $(beforeObj).removeClass('current');
+                $(e).addClass('current');
+                $(e).hasClass('tab-reg') ? showReg() : showLogin();
+            });
+        })
+    })();
+
+    $('#lsbmt').click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var username = $('#lusername').val();
+        var password = $('#lpassword').val();
+        var qrcode = $('#lqrcode').val();
+        if(!username) {
+            $('#ltips').text('用户名不能为空！');
+            return false;
+        } else if(!password) {
+            $('#ltips').text('密码不能为空！');
+            return false;
+        }
+        $.post(
+            '/ajax/m/login',
+            {username:username, password:password, qrcode:qrcode, autologin:'on'},
+            function(data) {
+                var json = JSON.parse(data || '{}');
+                if(json.status == '200') {
+                    $('#ltips').text('');
+                    /*if(window.confirm('登录成功,点确定离开此页')) {
+                     window.close();
+                     }*/
+                    document.write('登录成功,请关闭此页面');
+                } else {
+                    $('#ltips').text(json.msg);
+                }
+                return false;
+            }
+        );
+    });
+
+    $('#rsbmt').click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var username = $('#rusername').val(),
+            thenregname = username,
+            password = $('#rpassword').val(),
+            thenregpsd = password,
+            repassword = $('#rrepassword').val(),
+            qrcode = $('#rqrcode').val();
+        if(!username) {
+            $('#rtips').text('用户名不能为空！');
+            return false;
+        } else if(!password) {
+            $('#rtips').text('密码不能为空！');
+            return false;
+        } else if(repassword != password) {
+            $('#rtips').text('两次密码输入不一致！');
+            return false;
+        }
+        $.post(
+            '/ajax/m/reg',
+            {account_name:username, password:password, repassword:repassword, qrcode:qrcode},
+            function(data) {
+                var json = JSON.parse(data);
+                if(json.status == '200') {
+                    $('#rtips').text('');
+                    if (thenregname != '' && thenregpsd != '') {
+                        var postparms = {"username":thenregname,"password":thenregpsd, "qrcode":qrcode};
+                        $.post(
+                            '/ajax/m/login',
+                            postparms,
+                            function(res) {
+                                var rjson = {};
+                                try{rjson = JSON.parse(res);
+                                }catch(err){};
+
+                                if(rjson && rjson.status && rjson.status == 200) {
+                                    document.write('注册成功');
+                                    return false;
+                                }
+                            }
+                        );
+                    }
+                } else {
+                    $('#rtips').text(json.msg);
+                }
+                return false;
+            }
+        );
+    });
+});
+</script>
+</html>

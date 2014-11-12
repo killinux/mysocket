@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" manifest="/rtw/ott.appcache">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, target-densitydpi=high-dpi">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+	    <title>登录</title>
+	    <!--inline[../../common/html/head.html]-->
+	    <link href="css/user.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<div class="title">登录</div>
+		<div class="login-form">
+			<p class="account">
+				<label for="lusername" id="for-lusername" class="for-lusername">手机号/风行账号</label>
+				<i class="icon-login icon-tel"></i>
+                <input type="text" id="lusername" name="lusername" class="inputstyle" />
+			</p>
+			<p class="password">
+				<label for="lpassword" id="for-lpassword" class="for-lpassword">密码</label>
+				<i class="icon-login icon-password"></i>
+                <input type="password" id="lpassword" name="lpassword" class="inputstyle" />
+			</p>
+			<p class="login-area">
+				<input type="hidden" id="lqrcode" name="lqrcode" value="{q}"/>
+                <a id="lsbmt" href="###" class="fun">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+			</p>
+			<p class="link-area">
+				<a id="forget-pass" class="other-link" href="javascript:;">忘记密码？</a>
+				<a id="register" class="other-link" href="javascript:;">注册风行账号</a>
+			</p>
+		</div>
+		<div class="other-login">
+			<span class="o-tip">
+				---- 使用合作网站账号登录 ----
+			</span>
+			<p class="login-icon">
+				<a href="#"><img src="../../common/img/QQ.png"></a>
+				<a href="#" class="sina-icon"><img src="../../common/img/sina.png"></a>
+			</p>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+$(document).ready(function() {
+	var searchTip = function(q, for_q){
+        q = $('#'+q), for_q = $('#'+for_q);
+        if(q === null || for_q === null) return;
+        for_q.show();
+        var bl = function(o){
+            for_q.hide();
+            if(o.attr('rel') && o.val() === ''){
+                o.val(o.attr('rel'));
+                o.select();
+            }
+        };
+
+        q.on('focus', function(){bl(q);});
+        q.on('blur',function(){if($.trim(q.val()).length === 0) for_q.show();else for_q.hide();});
+        for_q.on('click', function(){for_q.hide();q.focus();});
+
+        // 验证是否需要显示提示框
+        if($.trim(q.val()).length) bl(q);
+    };
+    searchTip('lusername', 'for-lusername');
+    searchTip('lpassword', 'for-lpassword');
+});
+</script>

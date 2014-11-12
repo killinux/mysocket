@@ -1,0 +1,33 @@
+.title {  font-size: 36px;
+	/*font-family: "HiraginoSansGB";*/
+	color: #565656;
+	font-weight: bold;
+	margin: 0 auto;
+	width: 100%;
+	height: 50px;
+	/*border-bottom: 1px solid #e5e5e5;*/
+	text-align: center;
+	margin-top: 45px;
+}
+
+/* login */
+.login-form {margin-top:160px; padding: 0 25px;}
+.login-form p{margin-top: 50px;position: relative;}
+.login-form p.login-area {margin-top: 70px;}
+.login-form p.link-area {margin-top: 30px;}
+.login-form label {position: absolute;top: 10px;left: 55px;font-size: 30px;color: #4c4c4c;}
+.icon-login {float: left; font-size: 45px;}
+.inputstyle {border-bottom: 2px solid #E5E5E5; width: 90%; margin-top:10px; margin-left: 10px; height: 46px; font-size: 30px; /*font-family: "HiraginoSansGB";*/}
+.fun {background-color: #f86400; width: 100%; text-decoration: none; text-align: center; color: #fff;font-size: 40px;height: 80px;line-height: 80px;display: block;}
+
+.link-area {text-align: right;}
+.link-area #register{padding-left: 60px;}
+.other-link {font-size: 28px; color:#999999;}
+.other-login {position: relative; font-size: 28px; color: #a8a8a8; text-align: center; width: 100%;margin-top: 200px; clear:right;}
+
+.login-icon {padding-top: 40px;}
+.sina-icon {padding-left: 60px;}
+
+/* register */
+.register-form {margin-top:160px; padding: 0 25px;}
+.register-form p{margin-top: 50px;position: relative;}
