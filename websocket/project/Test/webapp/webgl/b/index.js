@@ -3,13 +3,13 @@ function log(text) {
 	console.log(text);
 	//document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
 }
-var globle_x = 1;
-var globle_y = 1;
-var globle_z= 1;
+var globle_x = 10;
+var globle_y = 10;
+var globle_z= 10;
 function startServer() {
 	//var url = document.getElementById("serverip").value;
 	if ('WebSocket' in window) {
-		ws = new WebSocket("ws://haoning.net/webs/websocket/sline");
+		ws = new WebSocket("ws://192.168.0.102:8080/webs/websocket/sline");
 	} else if ('MozWebSocket' in window) {
 		ws = new MozWebSocket(url);
 	} else {
@@ -20,16 +20,22 @@ function startServer() {
 		log('Opened!');
 	};
 	ws.onmessage = function(event) {
-		log(event.data);
+		updateScene();
+        drawScene(ctx);
+		log("onmessage:"+event.data);
 		var x_value =event.data.split(",")[0];
 		var y_value = event.data.split(",")[1];
 		var z_value = event.data.split(",")[2];
 		if(y_value==undefined){y_value=0;}
-		if(z_value==undefined){z_value=0;}
-		globle_x=x_value;
-		globle_y=y_value;
-		globle_z=z_value;
-		console.log(globle_x+" "+globle_y+" "+globle_z); 
+		if(z_value==undefined){z_value=10;}
+//		globle_x=myrand();//x_value;
+//		globle_y=myrand();//y_value;
+//		globle_z=myrand();//z_value;
+		globle_x=parseInt(x_value);
+		globle_y=parseInt(y_value);
+		globle_z=parseInt(z_value);
+		log("onmessage myrand:"+myrand());
+		//console.log(globle_x+" "+globle_y+" "+globle_z); 
 	};
 	ws.onclose = function() {
 		log('Closed!');
@@ -52,8 +58,8 @@ var d= document ;
     var FPS = 30;//FPS
     var F = 300;//焦点距離
     var N = 1;//轨迹的个数  
-    var VERTEX_MAX = 5;//轨迹长度
-    var TRAIL_QUALITY = 4000;//轨迹的品质,越小越直
+    var VERTEX_MAX = 500;//轨迹长度
+    var TRAIL_QUALITY = 4;//轨迹的品质,越小越直
     var mu = 0.5;//前的主持人点的依赖程度
     var bmRandom = function(mu, sigma){
         var x, y, r, tmp=null, tmp2;
@@ -110,7 +116,7 @@ var d= document ;
             this.goal.y = target.y;
             this.goal.z = target.z;
         }else{//
-        	//console.log("t:"+t);globle_z
+        	
             this.anchor_2.x = this.anchor_1.x+myrand();
             this.anchor_2.y = this.anchor_1.y+myrand();
             this.anchor_2.z = this.anchor_1.z+myrand();
@@ -118,12 +124,14 @@ var d= document ;
             this.goal.y = this.anchor_2.y+myrand();
             this.goal.z = this.anchor_2.z+myrand();
 //            
-//            this.anchor_2.x = this.anchor_1.x+globle_x;
-//            this.anchor_2.y = this.anchor_1.y+globle_y;
-//            this.anchor_2.z = this.anchor_1.z+globle_z;
-//            this.goal.x = this.anchor_2.x+globle_x;
-//            this.goal.y = this.anchor_2.y+globle_y;
-//            this.goal.z = this.anchor_2.z+globle_z;
+//            this.anchor_2.x = this.anchor_1.x+globle_x/myrand();
+//            this.anchor_2.y = this.anchor_1.y+globle_y/myrand();
+//            this.anchor_2.z = this.anchor_1.z+globle_z/myrand();
+//            this.goal.x = this.anchor_2.x+globle_y/myrand();
+//            this.goal.y = this.anchor_2.y+globle_z/myrand();
+//            this.goal.z = this.anchor_2.z+globle_x/myrand();
+            console.log("this.anchor_2:"+this.anchor_2.x+";"+ this.anchor_2.y +";"+this.anchor_2.z);//globle_z
+        	console.log("this.goal:"+this.goal.x+";"+ this.goal.y +";"+this.goal.z +" -->"+myrand());            
         }
         this.start_time = t;
         this.take_time = 200+Math.random()*200;
@@ -137,7 +145,7 @@ var d= document ;
         }
     };
     Trail.prototype.update = function(t, target){
-    	console.log("update:"+t+" "+target);
+    	//console.log("update:"+t+" "+target);
         bezier3(
             t-this.start_time,
             this.start,
@@ -148,7 +156,7 @@ var d= document ;
             this.pos
             );
         if(t-this.start_time > this.take_time){
-        	console.log("update----"+t+" "+this.start_time+" "+this.take_time);
+        	//console.log("update----"+t+" "+this.start_time+" "+this.take_time);
             this.setNextGoal(this.start_time+this.take_time, target);
             this.update(t, target);
         }
@@ -309,7 +317,7 @@ var d= document ;
     canvas.width = w.innerWidth;
     canvas.height = w.innerHeight;
     ctx.translate(canvas.width/2, canvas.height/2);
-    setInterval(function(){
+   // setInterval(function(){
         updateScene();
         drawScene(ctx);
-    }, 1000/FPS);
+   // }, 1000/FPS);

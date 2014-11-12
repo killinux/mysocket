@@ -29,11 +29,12 @@ public class LineWebSocketServlet extends WebSocketServlet {
 			try {
 				System.out.println("Open Client.");
 				this.myoutbound = outbound;
-				mykey ="open "+System.currentTimeMillis();;
+				//mykey ="open "+System.currentTimeMillis();;
+				mykey =""+System.currentTimeMillis();;
 				mmiList.put(mykey, this);
 				System.out.println("mmiList size:"+mmiList.size());
 				outbound.writeTextMessage(CharBuffer.wrap(mykey));
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
