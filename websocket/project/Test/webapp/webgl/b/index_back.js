@@ -1,4 +1,8 @@
 var ws = null;
+function log(text) {
+	console.log(text);
+	//document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
+}
 var globle_x = 10;
 var globle_y = 10;
 var globle_z= 10;
@@ -9,20 +13,20 @@ function startServer() {
 	} else if ('MozWebSocket' in window) {
 		ws = new MozWebSocket(url);
 	} else {
-		//log('浏览器不支持');
+		log('浏览器不支持');
 		return;
 	}
 	ws.onopen = function() {
-		//log('Opened!');
+		log('Opened!');
 	};
 	ws.onmessage = function(event) {
 		updateScene();
         drawScene(ctx);
-		//log("onmessage:"+event.data);
+		log("onmessage:"+event.data);
 		var x_value =event.data.split(",")[0];
 		var y_value = event.data.split(",")[1];
 		var z_value = event.data.split(",")[2];
-		if(y_value==undefined){y_value=10;}
+		if(y_value==undefined){y_value=0;}
 		if(z_value==undefined){z_value=10;}
 //		globle_x=myrand();//x_value;
 //		globle_y=myrand();//y_value;
@@ -30,11 +34,11 @@ function startServer() {
 		globle_x=parseInt(x_value);
 		globle_y=parseInt(y_value);
 		globle_z=parseInt(z_value);
-		//log("onmessage myrand:"+myrand());
+		log("onmessage myrand:"+myrand());
 		//console.log(globle_x+" "+globle_y+" "+globle_z); 
 	};
 	ws.onclose = function() {
-		//log('Closed!');
+		log('Closed!');
 	}
 }
 function sendMessage() {
@@ -55,8 +59,8 @@ var d= document ;
     var F = 300;//焦点距離
     var N = 1;//轨迹的个数  
     var VERTEX_MAX = 500;//轨迹长度
-    var TRAIL_QUALITY = 1;//轨迹的品质,越小越直
-    var mu = 0.9;//前的主持人点的依赖程度
+    var TRAIL_QUALITY = 4;//轨迹的品质,越小越直
+    var mu = 0.5;//前的主持人点的依赖程度
     var bmRandom = function(mu, sigma){
         var x, y, r, tmp=null, tmp2;
         return function(){
@@ -104,7 +108,7 @@ var d= document ;
         this.anchor_1.y = this.start.y+(this.start.y-this.anchor_2.y)*mu;
         this.anchor_1.z = this.start.z+(this.start.z-this.anchor_2.z)*mu;
         if(target){
-        	//console.log("target:"+t);
+        	console.log("target:"+t);
             this.anchor_2.x = (this.anchor_1.x+target.x)/2+myrand();
             this.anchor_2.y = (this.anchor_1.y+target.y)/2+myrand();
             this.anchor_2.z = (this.anchor_1.z+target.z)/2+myrand();
@@ -126,8 +130,8 @@ var d= document ;
 //            this.goal.x = this.anchor_2.x+globle_y/myrand();
 //            this.goal.y = this.anchor_2.y+globle_z/myrand();
 //            this.goal.z = this.anchor_2.z+globle_x/myrand();
-           // console.log("this.anchor_2:"+this.anchor_2.x+";"+ this.anchor_2.y +";"+this.anchor_2.z);//globle_z
-        	console.log("this.goal:"+this.goal.x+";"+ this.goal.y +";"+this.goal.z );            //+" -->"+myrand()
+            console.log("this.anchor_2:"+this.anchor_2.x+";"+ this.anchor_2.y +";"+this.anchor_2.z);//globle_z
+        	console.log("this.goal:"+this.goal.x+";"+ this.goal.y +";"+this.goal.z +" -->"+myrand());            
         }
         this.start_time = t;
         this.take_time = 200+Math.random()*200;
@@ -266,7 +270,7 @@ var d= document ;
         }
     };
     var myrand = bmRandom(0,20);
-    //console.log("myrand:"+myrand());
+    console.log("myrand:"+myrand());
     var canvas = d.getElementById("world");
     var ctx = canvas.getContext("2d");
     var trails = [];
@@ -313,8 +317,7 @@ var d= document ;
     canvas.width = w.innerWidth;
     canvas.height = w.innerHeight;
     ctx.translate(canvas.width/2, canvas.height/2);
-    setInterval(function(){
-    	console.log("------------------------------------------");
+   // setInterval(function(){
         updateScene();
         drawScene(ctx);
-    }, 1000);
+   // }, 1000/FPS);

@@ -31,9 +31,11 @@
 <script type="text/javascript">
 	var ws = null;
 	function log(text) {
-		document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
+		console.log(text);
+		//document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
 	}
 	function startServer() {
+		//alert("aa");
 		var url = document.getElementById("serverip").value;
 		if ('WebSocket' in window) {
 			ws = new WebSocket(url);
@@ -44,16 +46,16 @@
 			return;
 		}
 		ws.onopen = function() {
-			//log('Opened!');
+			log('Opened!');
 		};
 		ws.onmessage = function(event) {
-			//log(event.data);
+			log(event.data);
 			var x_value =event.data.split(",")[0];
 			var y_value = event.data.split(",")[1];
 			makedot(x_value,y_value); 
 		};
 		ws.onclose = function() {
-			//log('Closed!');
+			log('Closed!');
 		}
 	}
 	function sendMessage() {

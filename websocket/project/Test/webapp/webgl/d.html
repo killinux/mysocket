@@ -110,7 +110,8 @@
 <script type="text/javascript">
 	var ws = null;
 	function log(text) {
-		document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
+		console.log(text);
+		//document.getElementById("log").innerHTML = text + "<br>"+ document.getElementById("log").innerHTML;
 	}
 	function startServer() {
 		Init(0.0,1.0,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0);
@@ -124,10 +125,10 @@
 			return;
 		}
 		ws.onopen = function() {
-			//log('Opened!');
+			log('Opened!');
 		};
 		ws.onmessage = function(event) {
-			//log(event.data);
+			log(event.data);
 			//console.log(event.data);
 			var x_value =event.data.split(",")[0];
 			var y_value = event.data.split(",")[1];
@@ -137,7 +138,7 @@
 			Init(x_value,y_value,z_value,0.0,-1.0,0.0,0.5,-0.5,0.0)
 		};
 		ws.onclose = function() {
-			//log('Closed!');
+			log('Closed!');
 		}
 	}
 	function sendMessage() {
@@ -153,7 +154,7 @@
 </head>
 <body onload='startServer()'><!-- Init(0.5,0.5,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0) -->
 <input id="serverip" type="text" size="20" style="display:none"
-		value="ws://haoning.net/webs/websocket/test" />
+		value="ws://haoning.net/webs/websocket/sline" />
 	<input type="button" onclick="Init(1.0,1.0,0.0,0.0,-1.0,0.0,0.5,-0.5,0.0)" value="test"/>
     <canvas id="myCanvas" style="border:1px solid red;" width='601px' height='450px'></canvas>
     <div id="log" style="display:block"></div>
