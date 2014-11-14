@@ -1,0 +1,24 @@
+<script type="text/javascript">
+window.onload = function(){    
+    var canvas = document.getElementById("myCanvas");    
+    var context = canvas.getContext("2d");    
+     
+    context.moveTo(188, 130);    
+     
+    var controlX1 = 140;    
+    var controlY1 = 10;    
+    var controlX2 = 388;    
+    var controlY2 = 10;    
+    var endX = 388;    
+    var endY = 170;    
+     
+    context.bezierCurveTo(controlX1, controlY1, controlX2,     
+        controlY2, endX, endY);    
+     
+    context.lineWidth = 1;    
+    context.strokeStyle = "black"; // line color    
+    context.stroke();    
+}; 
+</script>
+<canvas id='myCanvas'></canvas>
+
