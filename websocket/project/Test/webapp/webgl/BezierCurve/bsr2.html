@@ -10,7 +10,7 @@
             var t = 0;
             if(canvas.getContext){  
                 var ctx = canvas.getContext('2d');  
-                //»æÖÆÆğÊ¼µã¡¢¿ØÖÆµã¡¢ÖÕµã  
+                //ç»˜åˆ¶èµ·å§‹ç‚¹ã€æ§åˆ¶ç‚¹ã€ç»ˆç‚¹  
                 strokeControlPoint(ctx);
                 strokeLine(ctx,{x:P0.x+2.5,y:P0.y-2.5},{x:P1.x-2.5,y:P1.y+2.5});
                 strokeLine(ctx,{x:P1.x+2.5,y:P1.y+2.5},{x:P2.x-2.5,y:P2.y-2.5});
@@ -69,7 +69,7 @@
             }
 
             function renderUI(ctx){
-                //»æÖÆÆğÊ¼µã¡¢¿ØÖÆµã¡¢ÖÕµã  
+                //ç»˜åˆ¶èµ·å§‹ç‚¹ã€æ§åˆ¶ç‚¹ã€ç»ˆç‚¹  
                 strokeControlPoint(ctx);
                 strokeLine(ctx,{x:P0.x+2.5,y:P0.y-2.5},{x:P1.x-2.5,y:P1.y+2.5});
                 strokeLine(ctx,{x:P1.x+2.5,y:P1.y+2.5},{x:P2.x-2.5,y:P2.y-2.5});

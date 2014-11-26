@@ -4,39 +4,39 @@
 <title>DeviceOrientationEvent</title>
 <meta charset="UTF-8" />
 <script type="text/javascript">
-function orientationHandler（event） {
-	document.getElementById（"alpha"）.innerHTML = event.alpha;
-	document.getElementById（"beta"）.innerHTML = event.beta;
-	document.getElementById（"gamma"）.innerHTML = event.gamma;
-	document.getElementById（"heading"）.innerHTML = event.webkitCompassHeading;
-	document.getElementById（"accuracy"）.innerHTML = event.webkitCompassAccuracy;
+function orientationHandler(event){
+	document.getElementById("alpha").innerHTML = event.alpha;
+	document.getElementById("beta").innerHTML = event.beta;
+	document.getElementById("gamma").innerHTML = event.gamma;
+	document.getElementById("heading").innerHTML = event.webkitCompassHeading;
+	document.getElementById("accuracy").innerHTML = event.webkitCompassAccuracy;
 }
 
 
-function motionHandler（event） {
-	document.getElementById（"interval"）.innerHTML = event.interval;
+function motionHandler(event){
+	document.getElementById("interval").innerHTML = event.interval;
 	var acc = event.acceleration;
-	document.getElementById（"x"）.innerHTML = acc.x;
-	document.getElementById（"y"）.innerHTML = acc.y;
-	document.getElementById（"z"）.innerHTML = acc.z;
+	document.getElementById("x").innerHTML = acc.x;
+	document.getElementById("y").innerHTML = acc.y;
+	document.getElementById("z").innerHTML = acc.z;
 	var accGravity = event.accelerationIncludingGravity;
-	document.getElementById（"xg"）.innerHTML = accGravity.x;
-	document.getElementById（"yg"）.innerHTML = accGravity.y;
-	document.getElementById（"zg"）.innerHTML = accGravity.z;
+	document.getElementById("xg").innerHTML = accGravity.x;
+	document.getElementById("yg").innerHTML = accGravity.y;
+	document.getElementById("zg").innerHTML = accGravity.z;
 	var rotationRate = event.rotationRate;
-	document.getElementById（"Ralpha"）.innerHTML = rotationRate.alpha;
-	document.getElementById（"Rbeta"）.innerHTML = rotationRate.beta;
-	document.getElementById（"Rgamma"）.innerHTML = rotationRate.gamma;
+	document.getElementById("Ralpha").innerHTML = rotationRate.alpha;
+	document.getElementById("Rbeta").innerHTML = rotationRate.beta;
+	document.getElementById("Rgamma").innerHTML = rotationRate.gamma;
 }
 
-if （window.DeviceMotionEvent） {
-	window.addEventListener（"devicemotion"， motionHandler， false）;
+if (window.DeviceMotionEvent){
+	window.addEventListener("devicemotion", motionHandler, false);
 } else {
 	document.body.innerHTML = "What user agent u r using？？？";
 }
 
-if （window.DeviceOrientationEvent） {
-	window.addEventListener（"deviceorientation"， orientationHandler， false）;
+if (window.DeviceOrientationEvent){
+	window.addEventListener("deviceorientation", orientationHandler, false);
 } else {
 	document.body.innerHTML = "What user agent u r using？？？";
 };
@@ -71,13 +71,13 @@ if （window.DeviceOrientationEvent） {
 	</p>
 	<hr />
 	<p>
-		x轴加快度（推敲重力加快度）：<span id="xg">0</span>米每二次方秒
+		x轴加快度(推敲重力加快度)：<span id="xg">0</span>米每二次方秒
 	</p>
 	<p>
-		y轴加快度（推敲重力加快度）：<span id="yg">0</span>米每二次方秒
+		y轴加快度(推敲重力加快度)：<span id="yg">0</span>米每二次方秒
 	</p>
 	<p>
-		z轴加快度（推敲重力加快度）：<span id="zg">0</span>米每二次方秒
+		z轴加快度(推敲重力加快度)：<span id="zg">0</span>米每二次方秒
 	</p>
 	<hr />
 	<p>
