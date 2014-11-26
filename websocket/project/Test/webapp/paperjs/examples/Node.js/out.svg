@@ -1,0 +1,18 @@
+<svg x="0" y="0" width="300" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <radialGradient cx="150" cy="150" r="120" gradientUnits="userSpaceOnUse" id="color-1">
+      <stop offset="0" stop-color="#ffff00" stop-opacity="0"></stop>
+      <stop offset="0.5" stop-color="#ff0000"></stop>
+      <stop offset="1" stop-color="#000000"></stop>
+    </radialGradient>
+    <linearGradient x1="150" y1="301.50758" x2="150" y2="598.49242" gradientUnits="userSpaceOnUse" id="color-2">
+      <stop offset="0" stop-color="#ffff00" stop-opacity="0"></stop>
+      <stop offset="0.5" stop-color="#ff0000"></stop>
+      <stop offset="1" stop-color="#000000"></stop>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="sans-serif" font-size="12" text-anchor="start" mix-blend-mode="normal">
+    <path d="M30,150c0,-66.27417 53.72583,-120 120,-120c66.27417,0 120,53.72583 120,120c0,66.27417 -53.72583,120 -120,120c-66.27417,0 -120,-53.72583 -120,-120z" fill="url(#color-1)"></path>
+    <polygon points="1.50758,450 150,301.50758 298.49242,450 150,598.49242" fill="url(#color-2)"></polygon>
+  </g>
+</svg>

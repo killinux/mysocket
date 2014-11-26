@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta>
+<style type="text/css">
+    body{margin:0;}
+    canvas{margin: 0px;}
+</style>
+</head>
+<body  >
+<style>
+    #canvas{
+        position: absolute;
+        left:50px;
+        top:50px;
+    }
+    #div1{
+            position: absolute;
+            background-color:blue;
+            width:5px;
+            height:5px;
+    }
+</style>
+<div id="div1"></div>
+<canvas id="canvas"    width="200" height="200" style="border: 1px solid #ccc;"></canvas>
+  
+<button id="bnt" onclick="beginDraw()">开始画贝塞尔曲线</button>
+<button id="bnt" onclick="play()">沿着贝赛尔曲线运动</button>
+先点"开始画贝塞尔曲线",在方框点三次不同坐标,生成曲线后，点第二按钮
+  
+<script>
+var canvas=document.getElementById('canvas');
+var context=canvas.getContext('2d');
+var ctx=context;
+var bnt=document.getElementById('bnt');
+ 
+var isDraw=0,drawIndex=0,drawPs=[];
+function beginDraw(){ 
+        ctx.restore(); 
+        ctx.clearRect(0,0,200,200);
+        isDraw=1;
+        drawIndex=0;
+        drawPs=[];
+        bnt.disabled=true;
+         
+}
+canvas.onmousedown=function(evt){
+    if(!isDraw) return ;
+    evt=evt||window.event;
+  
+    pt=[evt.offsetX,evt.offsetY]
+     drawPs[ drawIndex++]=pt;
+     if(drawIndex==3){
+              bnt.disabled=false;
+              isDraw=0;
+              ctx.clearRect(0,0,200,200);
+              draw.apply(this, drawPs);
+     }else{
+  
+        ctx.beginPath();
+        ctx.strokeStyle = '#00f'; 
+        context.arc( pt[0],pt[1], 2, 0, Math.PI * 2, true);
+  
+        ctx.stroke();
+     }
+  
+}
+function draw(a,b,c) {
+  
+    ctx.beginPath();  
+    ctx.lineWidth=1;
+    ctx.moveTo(a[0],a[1]);  
+    ctx.quadraticCurveTo( b[0],b[1] ,c[0],c[1] ); 
+    ctx.strokeStyle = '#f00'; 
+    ctx.stroke();  
+              
+}
+ 
+//取出红色的路径
+function getPs(){
+    var i=0,ps=[],W=200,H=200;
+    var md= ctx.getImageData(0,0,W,H);
+    for(var y=0;y< W;y++){
+        for(var x=0;x< H;x++ ){
+            i=(x+y*W)*4;
+            if( md.data[i]  ) ps.push([x,y]);
+        }   
+    }
+    return ps;
+}
+//播放路径动画
+var playTir;
+function play(){
+     if(!drawPs.length) return;
+     var ps= getPs();
+     if(!ps.length) return;
+     xy= Math.abs( drawPs[0][0]-drawPs[2][0]) >Math.abs( drawPs[0][1]-drawPs[2][1] )?0:1;
+     ps.sort(function(a,b){ return  a[xy]-b[xy]  });
+     var left=canvas.offsetLeft,top=canvas.offsetTop;
+    var L=ps.length;
+    playTir=setInterval(function(){
+        if( (L-=2)<=0 ) return clearInterval(playTir);
+        div1.style.left=(ps[L][0]+left)+'px'
+        div1.style.top=(ps[L][1]+top)+'px' 
+    },1);
+}
+</script>
+</body>
+</html>
