@@ -1,0 +1,79 @@
+<div style="text-align: center;">
+        <canvas id="democanvas"  width="300px" height="300px"></canvas>
+    </div>
+    <script type="text/javascript">
+        (function(){
+            var canvas = document.getElementById('democanvas');
+            var P0 = {x:60,y:200};
+            var P1 = {x:160,y:60};
+            var P2 = {x:240,y:200};
+            var t = 0;
+            if(canvas.getContext){  
+                var ctx = canvas.getContext('2d');  
+                //绘制起始点、控制点、终点  
+                strokeControlPoint(ctx);
+                strokeLine(ctx,{x:P0.x+2.5,y:P0.y-2.5},{x:P1.x-2.5,y:P1.y+2.5});
+                strokeLine(ctx,{x:P1.x+2.5,y:P1.y+2.5},{x:P2.x-2.5,y:P2.y-2.5});
+                //
+                window.setInterval(function(){
+                    strokeBezierLine(ctx,P0,P1);
+                },20);
+            }  
+            function strokeControlPoint(ctx){
+                var r = 3;
+                ctx.strokeStyle = "rgba(0,0,0,1)";
+                strokeCircle(ctx,P0,r);
+                strokeCircle(ctx,P1,r);
+                strokeCircle(ctx,P2,r);
+            }
+            function strokeCircle(ctx,p,r){
+                if(ctx){
+                    ctx.beginPath();  
+                    ctx.arc(p.x,p.y,r,0,Math.PI*2,true); 
+                    ctx.stroke();
+                }
+            }
+            function strokeLine(ctx,P0,P1){
+                ctx.beginPath(); 
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = "rgba(205,205,205,1)";
+                ctx.moveTo(P0.x,P0.y);
+                ctx.lineTo(P1.x,P1.y);
+                ctx.stroke();
+            }
+            var P = {};
+            var NP = {};
+            function strokeBezierLine(ctx,P0,P1){
+                if(t > 1){
+                    t = 0;
+                    ctx.clearRect(0,0,300,300);
+                    renderUI(ctx);
+                } 
+                P = { 
+                    x : (1-t)*(1-t)*P0.x+2*t*(1-t)*P1.x+t*t*P2.x,
+                    y : (1-t)*(1-t)*P0.y+2*t*(1-t)*P1.y+t*t*P2.y
+                };
+                t += 0.01;
+                NP = {
+                    x : (1-t)*(1-t)*P0.x+2*t*(1-t)*P1.x+t*t*P2.x,
+                    y : (1-t)*(1-t)*P0.y+2*t*(1-t)*P1.y+t*t*P2.y
+                }
+                ctx.beginPath(); 
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = "rgba(255,0,0,1)";
+                ctx.moveTo(P.x,P.y);
+                ctx.lineTo(NP.x,NP.y);
+                ctx.stroke();
+            }
+
+            function renderUI(ctx){
+                //绘制起始点、控制点、终点  
+                strokeControlPoint(ctx);
+                strokeLine(ctx,{x:P0.x+2.5,y:P0.y-2.5},{x:P1.x-2.5,y:P1.y+2.5});
+                strokeLine(ctx,{x:P1.x+2.5,y:P1.y+2.5},{x:P2.x-2.5,y:P2.y-2.5});
+            }
+            
+        })();
+    </script>
